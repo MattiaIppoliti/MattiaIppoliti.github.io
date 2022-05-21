@@ -274,6 +274,7 @@ img {
 .home__greeting{
   display: block;
   color: var(--title-color);
+  margin-top: 1.5rem;
   margin-bottom: .25rem;
 }
 
