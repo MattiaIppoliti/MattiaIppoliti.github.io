@@ -127,9 +127,19 @@ let swiper = new Swiper('.portfolio__container', {
 });
 
 
-/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+/*==================== SCROLLREVEAL ANIMATION ====================*/
+const sr = ScrollReveal({
+    origin: 'top',
+    distance: '60px',
+    duration: 2500,
+    delay: 400,
+    //reset: true,
+})
 
-
+sr.reveal(`.home__data`)
+sr.reveal(`.home__handle`, {delay: 700})
+sr.reveal(`.home__social`, {delay: 900})
+sr.reveal(`.home__scroll`, {delay: 900})
 /*==================== CHANGE BACKGROUND HEADER ====================*/ 
 
 
