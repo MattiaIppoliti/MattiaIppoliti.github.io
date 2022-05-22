@@ -882,6 +882,9 @@ img {
 }
 
 /*==================== CONTACT ME ====================*/
+.contact{
+   margin-bottom: 10rem;
+}
 .contact__contanier{
   row-gap: 3rem;
   padding-bottom: 3rem;
@@ -990,11 +993,74 @@ img {
 
 /*==================== FOOTER ====================*/
 .footer{
-  background-color: var(--first-color);
+  position: relative;
+  background: #211438;
+  width: 100%;
+  min-height: 100px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.footer__wave{
+  position:absolute;
+  top: -100px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background-image: url(../img/wave.png);
+  background-size: 1000px 100px;
+}
+
+.footer__wave#wave1{
+  z-index: 1000;
+  opacity: 1;
+  bottom: 0;
+  animation: animateWave 4s linear infinite;
+}
+
+.footer__wave#wave2{
+  z-index: 1001;
+  opacity: 0.7;
+  bottom: 10px;
+  animation: animateWave__02 4s linear infinite;
+}
+
+.footer__wave#wave3{
+  z-index: 1002;
+  opacity: 0.2;
+  bottom: 15px;
+  animation: animateWave 3s linear infinite;
+}
+
+.footer__wave#wave4{
+  z-index: 100;
+  opacity: 0.7;
+  bottom: 12px;
+  animation: animateWave__02 3s linear infinite;
+}
+
+
+@keyframes animateWave{
+  0%{
+    background-position-x: 1000px;
+  }
+  100%{
+    background-position-x: 0px;
+  }
+}
+
+@keyframes animateWave__02{
+  0%{
+    background-position-x: 0px;
+  }
+  100%{
+    background-position-x: 1000px;
+  }
 }
 
 .footer__container{
-  padding: 2rem 0 6rem;
+  padding: 2rem 0 10rem;
 }
 
 .footer__title,
@@ -1064,6 +1130,14 @@ img {
 }
 .footer__social-link:hover{
   transform: scale(1.5, 1.5);
+}
+
+.dark-theme .footer{
+  background: #6E57E0;
+}
+
+.dark-theme .footer__wave{
+  background-image: url(../img/wave_dark.png);
 }
 
 /*========== SCROLL UP ==========*/
