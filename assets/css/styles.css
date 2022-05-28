@@ -256,7 +256,7 @@ img {
 }
 
 /*==================== HOME ====================*/
-.home-container{
+.home__container{
   row-gap: 4.5rem;
   padding-top: 2rem;
 }
@@ -318,8 +318,6 @@ img {
 
 .home__blob{
   width: 200px;
-  fill: var(--first-color);
-  align-items: center;
 }
 
 .home__blob-img{
@@ -447,6 +445,7 @@ img {
 .about__buttons{
   display: flex;
   justify-content: center;
+  margin-top: -5rem;
 }
 
 .about__buttons:hover .button__icon{
@@ -1253,6 +1252,40 @@ img {
 /* For large devices */
 @media screen and (min-width:992px){
 
+.home__container{
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 4rem;
+}
+
+.home__greeting,
+.home__education{
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+}
+
+.home__title{
+  font-size: var(--big-font-size);
+}
+
+.home__data{
+  grid-template-columns: .5fr 3fr;
+  padding-top: 3.5rem;
+  align-items: center;
+}
+
+.button{
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.home__handle{
+  width: 300px;
+  height: 300px;
+}
+
+.home__blob{
+  width: 300px;
+}
   .container{
     margin-left: auto;
     margin-right: auto;
@@ -1286,8 +1319,22 @@ img {
 /* For Very large devices */
 @media screen and (min-width:1680px){
 
-  .container {
+.container {
   max-width: 1200px;
+  }
+  
+.button{
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.home__handle{
+  width: 340px;
+  height: 340px;
+}
+
+.home__blob{
+  width: 340px;
 }
 
 .portfolio__content{
