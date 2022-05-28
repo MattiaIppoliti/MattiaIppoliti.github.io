@@ -1283,3 +1283,45 @@ img {
     grid-template-columns: repeat(3,1fr);
   }
 }
+/* For Very large devices */
+@media screen and (min-width:1680px){
+
+  .container {
+  max-width: 1200px;
+}
+
+.portfolio__content{
+  width: 768px;
+}
+
+.qualification [data-content]{
+  display: block;
+}
+
+.qualification__section{
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  column-gap: 5rem;
+}
+
+.qualification__tabs{
+  justify-content:space-around;
+}
+
+.qualification__button.qualification__active{
+  color: var(--title-color);
+}
+.qualification__content {
+  width: 600px;
+  height: 550px;
+  background-color: rgba(255,255,555,0.1);
+  padding: 50px;
+  border-radius: 5px;
+  backdrop-filter: 5px;
+  border: 2px solid trasparent;
+  background-color: padding-box;
+  box-shadow: 10px 10px 10px rgba(45,55,68, 0.10);
+  line-height: 1.5;
+}
+
+}	
