@@ -90,8 +90,7 @@
 .dark-theme .qualification__button,
 .dark-theme .footer__title,
 .dark-theme .skills__icon,
-.dark-theme .footer__link,
-.dark-theme .footer__copy{
+.dark-theme .footer__link{
   color: var(--title-color);
 }
 
@@ -114,6 +113,17 @@ body.dark-theme{
     --nav-bar: hsl(var(--second-hue), 32%, 28%);
 }
 
+/*========== Backgroud Immage ==========*/
+.home__backgroud{
+  background-image: url('../img/waves.svg');
+  overflow: hidden;
+  aspect-ratio: 675/150;
+  margin-top: -2rem;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 /*==================== BASE ====================*/
 * {
   box-sizing: border-box;
@@ -154,6 +164,7 @@ img {
 /*==================== REUSABLE CSS CLASSES ====================*/
 .section {
   padding: 2rem 0 4rem;
+  position: relative;
 }
 
 .section__title {
@@ -257,7 +268,7 @@ img {
 
 /*==================== HOME ====================*/
 .home__container{
-  row-gap: 4.5rem;
+  row-gap: 2.5rem;
   padding-top: 2rem;
 }
 
@@ -285,6 +296,10 @@ img {
 
 .home__name{
   font-size: var(--h1-font-size);
+}
+
+.home__title{
+  font-size: var(--big-font-size);
 }
 
 .home__img{
@@ -1116,14 +1131,6 @@ img {
   display: inline-flex;
 }
 
-.footer__copy{
-  display: block;
-  margin-top: 4.5rem;
-  color: var(--container-color);
-  text-align: center;
-  font-size: var(--smaller-font-size);
-}
-
 .footer__link:hover{
   color: var(--first-color-lighter);
 }
@@ -1317,7 +1324,14 @@ img {
   }
 }
 /* For Very large devices */
-@media screen and (min-width:1680px){
+@media screen and (min-width:1540px){
+
+.home__backgroud{
+  background-image: url('../img/waves.svg');
+  aspect-ratio: 960/200;
+  margin-top: -2rem;
+  width: 100%;
+}
 
 .container {
   max-width: 1200px;
