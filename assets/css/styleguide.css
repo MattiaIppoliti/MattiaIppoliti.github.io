@@ -330,7 +330,7 @@ p a {
     margin: 0 auto;
     padding-left: var(--container-padding);
     padding-right: var(--container-padding);
-    max-width: 100em;
+    max-width: 120em;
 }
 
 .container.large {
@@ -1302,7 +1302,7 @@ main .btn-hamburger.active {
     top: 0;
     position: absolute;
     background-color: var(--color-blue);
-    background-image: url("../img/form-checkmark.svg");
+    background-image: url("../img/Singapore.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

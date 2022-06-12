@@ -2058,7 +2058,7 @@ main.touch .main-wrap {
 }
 
 .single-about-image .overlay:nth-child(1) {
-    background: url("../img/DSC07312-2.jpg") center center no-repeat;
+    background: url("../img/Singapore_3.jpg") center center no-repeat;
     background-size: cover;
     top: -20vh;
     height: 105%;
@@ -2311,59 +2311,22 @@ main.touch .main-wrap {
 }
 
 .about-awwwards .single-image .overlay:nth-child(1) {
-    background: url("../img/DSC07292.jpg") center center no-repeat;
+    background: url("../img/Singapore_Vertical.jpg") center center no-repeat;
     background-size: cover;
-    height: 130%;
+    height: 100%;
     top: -25%;
     width: 105%;
-    left: -5%;
-    background: url("../img/DSC07079.jpg") center center no-repeat;
+    left: -25%;
+    background: url("../img/Singapore_Vertical.jpg") center center no-repeat;
     background-size: cover;
     top: -3%;
     height: 106%;
     width: 140%;
-    left: -40%;
+    left: -09%;
 }
 
 .about-awwwards .single-image .overlay:nth-child(2) {
     background: linear-gradient(to bottom, hsla(220, 13%, 5%, .075) 0%, hsla(220, 13%, 5%, 0) 50%);
-}
-
-.about-awwwards .awwwards-badge {
-    width: 6em;
-    position: relative;
-    margin-bottom: calc(var(--section-padding) / 4);
-    border-radius: 50%;
-}
-
-.about-awwwards .awwwards-badge::before {
-    display: block;
-    content: "";
-    padding-top: 100%;
-}
-
-.about-awwwards .awwwards-badge svg:nth-child(1) {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.about-awwwards .awwwards-badge svg:nth-child(1) g {
-    fill: var(--color-gray);
-}
-
-.about-awwwards .awwwards-badge svg:nth-child(2) {
-    width: 40%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.about-awwwards .awwwards-badge svg:nth-child(2) path {
-    fill: var(--color-gray);
 }
 
 @media screen and (max-width: 720px) {
@@ -2384,7 +2347,7 @@ main.touch .main-wrap {
         padding-top: 125%;
     }
     .about-awwwards .single-image .overlay:nth-child(1) {
-        background: url("../img/DSC07079.jpg") center center no-repeat;
+        background: url("../img/Singapore.jpg") center center no-repeat;
         background-size: cover;
         top: -8%;
         height: 110%;
