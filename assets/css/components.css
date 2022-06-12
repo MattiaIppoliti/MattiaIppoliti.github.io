@@ -1,0 +1,111 @@
+/* ------------------------- Components ® Code by Dennis -------------------------------------------------- */
+
+/* ------------------------- Span Lines H4 -------------------------------------------------- */
+
+.span-lines.animate .span-line {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.span-lines.animate .span-line .span-line-inner {
+    position: relative;
+    display: block;
+}
+
+/* ------------------------- Arrow -------------------------------------------------- */
+
+.arrow {
+    position: relative;
+    width: clamp(.9em, 1.1vw, 1.1em);
+}
+
+.arrow.big {
+    position: relative;
+    width: clamp(1.1em, 1.3vw, 1.25em);
+}
+
+.arrow svg {
+    display: block;
+    width: 100%;
+}
+
+/* ------------------------- PF -------------------------------------------------- */
+
+.profile-picture {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    background: url("../img/profile.png") center center no-repeat;
+    background-size: cover;
+    width: clamp(4.5em, 6.5vw, 8em);
+    height: clamp(4.5em, 6.5vw, 8em);
+}
+
+/* ------------------------- Pattern Dots -------------------------------------------------- */
+
+.dots {
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background: url("../img/dotted.svg") bottom right;
+    background-size: 1.25em 1.25em;
+    position: absolute;
+}
+
+/* ------------------------- Rounded Div -------------------------------------------------- */
+
+.rounded-div-wrap {
+    width: 100%;
+    top: 0;
+    position: relative;
+    height: 10vh;
+    overflow: hidden;
+}
+
+.rounded-div {
+    width: 150%;
+    content: "";
+    display: block;
+    position: absolute;
+    background: var(--color-white);
+    height: 750%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -86.666%);
+    z-index: 1;
+}
+
+/* ------------------------- Default Header -------------------------------------------------- */
+
+.default-header {
+    padding-top: calc(var(--section-padding) * 1.33);
+    padding-bottom: calc(var(--section-padding) * .66);
+}
+
+.default-header.theme-dark {
+    background: var(--color-dark);
+}
+
+.default-header h1 span {
+    display: block;
+}
+
+@media screen and (max-width: 720px) {
+    .default-header {
+        padding-top: calc(var(--section-padding) * 1.95);
+        padding-bottom: calc(var(--section-padding) * .75);
+    }
+    .default-header h1 span {
+        display: unset;
+    }
+}
+
+@media screen and (max-width: 460px) {
+    .default-header h1 {
+        font-size: 10vw;
+        font-size: calc(clamp(3.25em, 7vw, 8em) * .875);
+    }
+}
