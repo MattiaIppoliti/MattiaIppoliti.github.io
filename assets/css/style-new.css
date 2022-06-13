@@ -225,6 +225,12 @@ main.touch .main-wrap {
     }
 }
 
+@media screen and (max-width: 380px) {
+    .btn-text{
+        font-size: 0.9em;
+    }
+}
+
 /* ------------------------- Fixed Nav -------------------------------------------------- */
 
 .fixed-nav-back {
@@ -657,6 +663,7 @@ main.touch .main-wrap {
         font-size: 1em;
         margin-right: .25em;
     }
+
     .bottom-footer p {
         font-size: 1em;
     }
@@ -666,6 +673,7 @@ main.touch .main-wrap {
     .bottom-footer .stripe {
         display: block;
         margin-top: var(--gap-padding);
+        margin-bottom: var(--gap-padding);
         width: calc(100% - (var(--gap-padding) * .666));
         left: 50%;
         margin-left: calc(var(--gap-padding) * .333);
