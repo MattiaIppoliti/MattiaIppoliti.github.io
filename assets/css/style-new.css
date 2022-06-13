@@ -1234,6 +1234,7 @@ main.touch .main-wrap {
     }
     .tiny-work-grid .work-items h4 {
         font-size: 1.3em;
+        margin-right: 2rem;
     }
     .tiny-work-grid .work-items p {
         font-size: .8em;
@@ -2360,7 +2361,7 @@ main.touch .main-wrap {
         top: -8%;
         height: 110%;
         width: 150%;
-        left: -50%;
+        left: -7%;
     }
 }
 
