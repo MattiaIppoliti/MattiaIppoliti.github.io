@@ -24,7 +24,7 @@ Fork the GitHub repo https://github.com/MattiaIppoliti/MattiaIppoliti.github.io/
 
 Clone to your local repo:
 
-    git clone git@github.com:<your_github_username>/coding-interview-university.git
+    git clone git@github.com:<your_github_username>/MattiaIppoliti.github.io.git
     git checkout -b progress
     git remote add MattiaIppoliti https://github.com/MattiaIppoliti/MattiaIppoliti.github.io/
     git fetch --all
