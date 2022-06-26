@@ -7,6 +7,13 @@ Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 [![Setup Automated](https://img.shields.io/badge/setup-automated-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
+## Table of Contents
+
+- [If you don't want use git](#no-git)
+- [If you're comfortable with git](#comfortable-with-git)
+- [Don't feel you aren't smart enough](#arent-smart-enough)
+- [Enjoy!](#enojoy)
+
 ### If you don't want to use git
 
 On this page, click the Code button near the top, then click "Download ZIP". Unzip the file and you can work with the text files.
@@ -38,9 +45,12 @@ Mark all boxes with X after you completed your changes:
     git push --set-upstream origin progress
     git push --force
 
-## Don't feel you aren't smart enough
+### Don't feel you aren't smart enough
 
 - Successful software engineers are smart, but many have an insecurity that they aren't smart enough.
 - [The myth of the Genius Programmer](https://www.youtube.com/watch?v=0SARbwvhupQ)
 - [It's Dangerous to Go Alone: Battling the Invisible Monsters in Tech](https://www.youtube.com/watch?v=1i8ylq4j_EY)
 
+### Enjoy!
+
+[Enjoy the website!](https://mattiaippoliti.github.io/MattiaIppoliti/) 
