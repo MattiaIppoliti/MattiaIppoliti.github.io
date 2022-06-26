@@ -509,6 +509,15 @@ video.overlay {
     will-change: transform, color;
 }
 
+.ico {
+    stroke: var(--color-gray);
+    stroke-width: 2px;
+    margin-left: .5rem;
+    margin-bottom: .1rem;
+    height: 15px;
+    width: 15px
+}
+
 .btn-click:hover {
     text-decoration: none;
 }
@@ -887,6 +896,169 @@ main .btn-hamburger.active {
 #contact .nav-active .btn-hamburger .btn-click {
     -webkit-box-shadow: inset 0px 0px 0px 1px transparent !important;
     box-shadow: inset 0px 0px 0px 1px transparent !important;
+}
+
+/* --- Contact Experience Menu --- */
+
+#about .about-contact {
+    margin: 2rem 0
+}
+
+#about .about-contact,
+#about .about-contact li {
+    display: flex;
+    align-items: center;
+    list-style: none
+}
+
+#about .about-contact li {
+    flex: 0 0 auto;
+    margin: 0 1rem 0 0;
+    color: var(--gray)
+}
+
+#about .about-contact a {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    text-decoration: none
+}
+
+#about .about-contact a.bt {
+    background: var(--purple);
+    color: var(--bg);
+    padding: 0 1rem;
+    height: 2rem;
+    border-radius: 3rem;
+    margin-left: 1rem;
+    line-height: 2rem
+}
+
+#about .about-contact a.bt .ico {
+    margin-left: .5rem;
+    height: 14px;
+    width: 14px
+}
+
+#about .about-contact a.bt:hover {
+    background: var(--light)
+}
+
+#about .about-contact a .ico {
+    flex: 0 0 auto;
+    overflow: visible;
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke: var(--bg);
+    fill: var(--purple);
+    stroke-width: 2px;
+    transition: all .4s ease-out
+}
+
+#about .about-contact a:hover .ico {
+    fill: var(--light)
+}
+
+#about .about-grid {
+    padding: 3rem 2rem 0 0;
+    margin-right: -25vw;
+    width: 75vw
+}
+
+#about .about-grid h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem
+}
+
+#about .about-grid h2 span {
+    font-weight: 400
+}
+
+#about .about-grid .columns {
+    margin-bottom: 2rem
+}
+
+#about .about-grid ul {
+    display: grid;
+    grid-template: 1fr/repeat(4, 1fr);
+    grid-gap: 2rem;
+    grid-row-gap: 1rem
+}
+
+#about .about-grid li {
+    list-style: none;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5em;
+    color: var(--gray)
+}
+
+#about .about-grid .tools {
+    display: grid;
+    grid-template: 1fr/repeat(4, 1fr);
+    grid-gap: 2rem;
+    grid-row-gap: 1rem
+}
+
+#about .about-grid .tools ul {
+    display: block
+}
+
+@media screen and (max-width:1024px) {
+    #about:before {
+        position: absolute;
+        width: 100%;
+        height: 60vh;
+        background-image: linear-gradient(270deg, var(--bg), rgba(var(--bg-rgb), 0) 80%), linear-gradient(0deg, var(--bg), rgba(var(--bg-rgb), 0) 60%), url(../img/iuri-de-paula.16d3bf63.jpg)
+    }
+
+    #about .about-grid {
+        padding: 3rem 1rem 0 0;
+        margin: 0;
+        width: calc(100vw - 4rem)
+    }
+}
+
+@media screen and (max-width:768px) {
+
+    #about .about-grid .tools,
+    #about .about-grid ul {
+        grid-template: 1fr/repeat(3, 1fr)
+    }
+
+    #about .about-grid .tools ul {
+        display: block
+    }
+}
+
+@media screen and (max-width:568px) {
+    #about:before {
+        height: 80vh;
+        background-image: linear-gradient(270deg, var(--bg), rgba(var(--bg-rgb), 0) 50%), linear-gradient(0deg, var(--bg), rgba(var(--bg-rgb), 0) 60%), url(../img/iuri-de-paula.16d3bf63.jpg)
+    }
+
+    #about .static-container {
+        padding-top: 65vh
+    }
+
+    #about .about-grid .tools,
+    #about .about-grid ul {
+        grid-template: 1fr/1fr;
+        grid-gap: 1rem
+    }
+
+    #about .about-grid .tools ul {
+        display: block
+    }
+
+    #about .about-contact {
+        flex-flow: row wrap
+    }
+
+    #about .about-contact li:last-child {
+        flex: 0 0 100%;
+        margin: 1rem 0 0
+    }
 }
 
 /* --- Button Menu --- */

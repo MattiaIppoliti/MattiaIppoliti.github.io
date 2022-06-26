@@ -24,6 +24,11 @@
     <link href="../assets/css/styleguide.css" rel="stylesheet">
     <link href="../assets/css/components.css" rel="stylesheet">
     <link href="../assets/css/style-new.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+    <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css" />
+    <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    <!--==================== UNICONS ====================-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 </head>
 
 <body data-barba="wrapper">
@@ -96,7 +101,7 @@
                     <div class="stripe"></div>
                     <ul class="links-wrap">
                         <li class="btn btn-link">
-                            <a href="../index.html" class="btn-click magnetic" data-strength="24"
+                            <a href="../" class="btn-click magnetic" data-strength="24"
                                 data-strength-text="12">
                                 <span class="btn-text">
                                     <span class="btn-text-inner">Home</span>
@@ -104,7 +109,7 @@
                             </a>
                         </li>
                         <li class="btn btn-link">
-                            <a href="../work/work.html" class="btn-click magnetic" data-strength="24"
+                            <a href="../work/" class="btn-click magnetic" data-strength="24"
                                 data-strength-text="12">
                                 <span class="btn-text">
                                     <span class="btn-text-inner">Work</span>
@@ -112,7 +117,7 @@
                             </a>
                         </li>
                         <li class="btn btn-link active">
-                            <a href="../about/about.html" class="btn-click magnetic" data-strength="24"
+                            <a href="../about/" class="btn-click magnetic" data-strength="24"
                                 data-strength-text="12">
                                 <span class="btn-text">
                                     <span class="btn-text-inner">About</span>
@@ -120,7 +125,7 @@
                             </a>
                         </li>
                         <li class="btn btn-link">
-                            <a href="../accomplishments/accomplishments.html" class="btn-click magnetic"
+                            <a href="../accomplishments/" class="btn-click magnetic"
                                 data-strength="24" data-strength-text="12">
                                 <span class="btn-text">
                                     <span class="btn-text-inner">Accomplishments</span>
@@ -128,7 +133,7 @@
                             </a>
                         </li>
                         <li class="btn btn-link">
-                           <a href="../contact/contact.html" class="btn-click magnetic" data-strength="24"
+                           <a href="../contact/" class="btn-click magnetic" data-strength="24"
                                data-strength-text="12">
                                <span class="btn-text">
                                    <span class="btn-text-inner">Contact</span>
@@ -190,7 +195,7 @@
                 </div>
                 <ul class="links-wrap">
                     <li class="btn btn-link">
-                        <a href="../work/work.html" class="btn-click magnetic" data-strength="20"
+                        <a href="../work/" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">Work</span>
@@ -198,7 +203,7 @@
                         </a>
                     </li>
                     <li class="btn btn-link active">
-                        <a href="about.html" class="btn-click magnetic" data-strength="20"
+                        <a href="../about/" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">About</span>
@@ -206,7 +211,7 @@
                         </a>
                     </li>
                     <li class="btn btn-link">
-                        <a href="../accomplishments/accomplishments.html" class="btn-click magnetic" data-strength="20"
+                        <a href="../accomplishments/" class="btn-click magnetic" data-strength="20"
                             data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">Accomplishments</span>
@@ -214,7 +219,7 @@
                         </a>
                     </li>
                     <li class="btn btn-link">
-                        <a href="../contact/contact.html" class="btn-click magnetic" data-strength="20" data-strength-text="10">
+                        <a href="../contact/" class="btn-click magnetic" data-strength="20" data-strength-text="10">
                             <span class="btn-text">
                                 <span class="btn-text-inner">Contact</span>
                             </span>
@@ -291,7 +296,8 @@
                                 data-strength-text="15">
                                 <div class="btn-fill"></div>
                                 <span class="btn-text">
-                                    <span class="btn-text-inner change">Download CV</span>
+                                    <span class="btn-text-inner change">Download CV </span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="ico"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M8 11.4l3.3-2.9m-6.6 0L8 11.4V.5M.5 10.8v4.7h15v-4.7"></path></svg>
                                 </span>
                             </a>
                         </div>
@@ -306,11 +312,12 @@
                 </div>
             </div>
         </section>
+
         <section class="section about-services" data-scroll-section>
             <div class="container">
                 <div class="row">
                     <div class="flex-col">
-                        <h2>I can help you with <span class="animate-dot">.</span><span
+                        <h2>Main Skills <span class="animate-dot">.</span><span
                                 class="animate-dot">.</span><span class="animate-dot">.</span></h2>
                     </div>
                 </div>
@@ -318,16 +325,69 @@
                     <div class="flex-col">
                         <h5>01</h5>
                         <div class="stripe"></div>
-                        <h4>Design</h4>
-                        <p>With a solid track record in designing websites and apps, I deliver strong and user-friendly
-                            digital designs. Solid company branding is the foundation of any succesful website.</p>
+                        <h4>Front-End</h4>
+                        <ul>
+                            <li>HTML,</li>
+                            <li>CSS,</li>
+                            <li>JavaScript,</li>
+                            <li>NodeJS,</li>
+                            <li>Angular.</li>
+                        </ul>
                     </div>
                     <div class="flex-col">
                         <h5>02</h5>
                         <div class="stripe"></div>
-                        <h4>Development</h4>
-                        <p>I build scalable websites from scratch that fit seamlessly with design. My focus is on micro
-                            animations, transitions and interaction.</p>
+                        <h4>Software Engineer</h4>
+                        <ul>
+                            <li>SQL,</li>
+                            <li>Python,</li>
+                            <li>C++,</li>
+                            <li>Excel,</li>
+                            <li>MATLAB.</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col">
+                        <h5>03</h5>
+                        <div class="stripe"></div>
+                        <h4>Business Intelligence</h4>
+                        <ul>
+                            <li>Power BI,</li>
+                            <li>Tableau ,</li>
+                            <li>Qlik,</li>
+                            <li>Splunk.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="flex-col">
+                        <h2><span class="animate-dot">.</span><span
+                                class="animate-dot">.</span><span class="animate-dot">.</span> Tools</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <h5>01</h5>
+                        <div class="stripe"></div>
+                        <h4>Programming</h4>
+                        <ul>
+                            <li>Git,</li>
+                            <li>Jupyter,</li>
+                            <li>Bitbucket,</li>
+                            <li>Openshift.</li>
+                        </ul>
+                    </div>
+                    <div class="flex-col">
+                        <h5>02</h5>
+                        <div class="stripe"></div>
+                        <h4>Project Management</h4>
+                        <ul>
+                            <li>Jira,</li>
+                            <li>Microsoft Project,</li>
+                            <li>Confluence.</li>
+                        </ul>
                     </div>
                     <div class="flex-col">
                         <h5>03</h5>
@@ -348,13 +408,48 @@
                                         </g>
                                     </g>
                                 </svg>
-                            </span>The full package</h4>
-                        <p>A complete website from concept to implementation, that's what makes me stand out. My great
-                            sense for design and my development skills enable me to create kick-ass projects.</p>
+                            </span>Presentation</h4>
+                            <ul>
+                                <li>Figma,</li>
+                                <li>Office Suite,</li>
+                                <li>Photoshop.</li>
+                            </ul>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section class="section about-experience" data-scroll-section>
+            <div class="container">
+                <div class="row">
+                    <div class="flex-col">
+                        <h2>Experience <span class="animate-dot">.</span><span
+                                class="animate-dot">.</span><span class="animate-dot">.</span></h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="flex-col">
+                        <h5><i class="uil uil-calendar-alt"></i>Oct.2021 - Present</h5>
+                        <div class="stripe"></div>
+                        <h4>Project Engineer</h4>
+                        <p><i class="uil uil-map-pin-alt"></i> Intesa San Paolo</p>
+                    </div>
+                    <div class="flex-col">
+                        <h5><i class="uil uil-calendar-alt"></i>May.2021 -Oct.2021</h5>
+                        <div class="stripe"></div>
+                        <h4>Data Engineer</h4>
+                        <p><i class="uil uil-map-pin-alt"></i> Intesa San Paolo</p>
+                    </div>
+                    <div class="flex-col">
+                        <h5><i class="uil uil-calendar-alt"></i> Mar.2019 -Jun.2019</h5>
+                        <div class="stripe"></div>
+                        <h4>Software Engineer Intern</h4>
+                        <p><i class="uil uil-map-pin-alt"></i> A*STAR Singapore</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section about-awwwards" data-scroll-section>
             <div class="container medium">
                 <div class="row">
@@ -412,7 +507,7 @@
                                 <div class="btn btn-round" data-scroll data-scroll-speed="-1"
                                     data-scroll-direction="horizontal" data-scroll-position="bottom"
                                     data-scroll-offset="-50%, 0">
-                                    <a href="../contact/contact.html" class="btn-click magnetic " data-strength="100"
+                                    <a href="../contact/" class="btn-click magnetic " data-strength="100"
                                         data-strength-text="50">
                                         <div class="btn-fill"></div>
                                         <span class="btn-text">
