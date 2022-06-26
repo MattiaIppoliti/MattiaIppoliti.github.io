@@ -9,10 +9,10 @@ Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
 
 ## Table of Contents
 
-- [If you don't want use git](#no-git)
-- [If you're comfortable with git](#comfortable-with-git)
-- [Don't feel you aren't smart enough](#arent-smart-enough)
-- [Enjoy!](#enojoy)
+- [If you don't want use git](#if-you-don't-want-use-git)
+- [If you're comfortable with git](#if-you're-confortable-with-git)
+- [Don't feel you aren't smart enough](#don't-feel-you-aren't-smart-enough)
+- [Enjoy](#enjoy)
 
 ### If you don't want to use git
 
