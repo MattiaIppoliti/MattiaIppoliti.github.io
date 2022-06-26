@@ -2,13 +2,17 @@
 
 Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
 
+[![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
+[![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
+[![Setup Automated](https://img.shields.io/badge/setup-automated-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+
 ### If you don't want to use git
 
 On this page, click the Code button near the top, then click "Download ZIP". Unzip the file and you can work with the text files.
 
 If you're open in a code editor that understands markdown, you'll see everything formatted nicely.
 
-![How to download the repo as a zip file](https://d3j2pkmjtin6ou.cloudfront.net/how-to-download-as-zip.png)
+![How to download the repo as a zip file](https://mattiaippolitiwebsite.s3.amazonaws.com/clone.jpg)
 
 ### If you're comfortable with git
 
