@@ -2151,13 +2151,18 @@ main.touch .main-wrap {
 /* ------------------------- About - Services -------------------------------------------------- */
 
 .about-services {
-    padding-top: calc(var(--section-padding) * .75);
+    padding-top: calc(var(--section-padding) * .5);
     background: var(--color-lightgray);
     margin-top: -1px;
+    padding-bottom: calc(var(--section-padding) * .5);
+}
+
+.about-services .container {
+    padding-bottom: 2em;
 }
 
 .about-services .row:nth-child(1) {
-    padding-bottom: calc(var(--section-padding) / 2);
+    padding-bottom: calc(var(--section-padding) / 3);
 }
 
 .about-services .row:nth-child(2) {
@@ -2171,7 +2176,7 @@ main.touch .main-wrap {
 }
 
 .about-services .row:nth-child(2) .flex-col h5:nth-child(1) {
-    padding-bottom: 2em;
+    padding-bottom: 3em;
 }
 
 .about-services .row:nth-child(2) .flex-col h5 {
@@ -2198,8 +2203,60 @@ main.touch .main-wrap {
     fill: var(--color-dark);
 }
 
-.about-services .row:nth-child(2) .flex-col p:nth-child(4) {
-    padding-top: 2em;
+.about-services .row:nth-child(2) .flex-col ul:nth-child(4) {
+    padding-top: 1em;
+}
+
+.about-experience {
+    padding-top: calc(var(--section-padding) * .75);
+    background: var(--color-border);
+    margin-top: -1px;
+}
+
+.about-experience .row:nth-child(1) {
+    padding-bottom: calc(var(--section-padding) / 3);
+}
+
+.about-experience .row:nth-child(2) {
+    width: calc(100% + calc(var(--container-padding) / 1.5));
+    margin-left: calc(var(--container-padding) / -1.5);
+}
+
+.about-experience .row:nth-child(2) .flex-col {
+    width: 33.333%;
+    padding-left: calc(var(--container-padding) / 1.5);
+}
+
+.about-experience .row:nth-child(2) .flex-col h5:nth-child(1) {
+    padding-bottom: 3em;
+}
+
+.about-experience .row:nth-child(2) .flex-col h5 {
+    margin: 0;
+    font-size: .8em;
+}
+
+.about-experience .row:nth-child(2) .flex-col h4 {
+    margin: 0;
+}
+
+.about-experience .row:nth-child(2) .flex-col .stripe {
+    margin-bottom: 2em;
+}
+
+.about-experience .row:nth-child(2) .flex-col svg {
+    width: 1em;
+    padding: 0;
+    margin-right: .25em;
+    transform: translate(0, -.05em);
+}
+
+.about-experience .row:nth-child(2) .flex-col svg path {
+    fill: var(--color-dark);
+}
+
+.about-experience .row:nth-child(2) .flex-col ul:nth-child(4) {
+    padding-top: 1em;
 }
 
 .animate-dot {
