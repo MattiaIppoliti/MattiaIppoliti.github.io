@@ -139,7 +139,7 @@ body {
 /* Selection */
 
 ::selection {
-    background-color: var(--color-blue);
+    background-color: var(--color-blue-dark);
     color: var(--color-white);
     text-shadow: none;
 }
