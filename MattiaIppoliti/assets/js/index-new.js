@@ -863,16 +863,16 @@ function initVisualFilter() {
                 }, 300);
             }
         });
-        $('.design-btn').click(function() {
+        $('.data-btn').click(function() {
             if ($(this).hasClass('active')) {} else {
                 $('.toggle-row .btn-normal').removeClass('active');
                 $('.toggle-row .btn-normal').addClass('not-active');
                 $(this).addClass('active');
                 $(this).removeClass('not-active');
-                // Cookies.set("filter", "design", { expires: 1 });
+                // Cookies.set("filter", "data", { expires: 1 });
                 setTimeout(function() {
                     $('.mouse-pos-list-image li, .mouse-pos-list-image-wrap li, .work-tiles li').removeClass('visible');
-                    $('.mouse-pos-list-image li.design, .mouse-pos-list-image-wrap li.design, .work-tiles li.design').addClass('visible');
+                    $('.mouse-pos-list-image li.data, .mouse-pos-list-image-wrap li.data, .work-tiles li.data').addClass('visible');
                 }, 300);
             }
         });
