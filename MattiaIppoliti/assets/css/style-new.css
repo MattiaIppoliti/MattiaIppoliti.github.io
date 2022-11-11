@@ -1,5 +1,4 @@
-/* ------------------------- Style ® Code by Dennis -------------------------------------------------- */
-
+/* ------------------------- Style -------------------------------------------------- */
 main {
     box-sizing: border-box;
     overflow: hidden;
@@ -209,6 +208,18 @@ main.touch .main-wrap {
     padding: calc(var(--gap-padding) / 2) calc(var(--gap-padding) / 2);
 }
 
+.btn-link.btn-left-top .cbd-logo-image{
+    width: 5em;
+    transform: translateX(0) rotate(0.001deg);
+    position: relative;
+    display: inline-block;
+    transition: var(--animation-primary);
+}
+
+.btn-link.btn-left-top:hover .cbd-logo-image{
+    transform: translateX(-4.9em) rotate(0.001deg);
+}
+
 .nav-bar .links-wrap li:last-child {
     display: none;
 }
@@ -222,6 +233,9 @@ main.touch .main-wrap {
     }
     .nav-bar .links-wrap li:last-child {
         display: block;
+    }
+    .btn-link.btn-left-top:hover .cbd-logo-image{
+        transform: translate(0, 0) rotate(0.001deg);
     }
 }
 
