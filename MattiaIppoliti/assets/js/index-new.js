@@ -737,10 +737,17 @@ function initMagneticButtons() {
 var $circle = $('.second-circle')
 
 function moveCircle(e) {
-    TweenLite.to($circle, 0.3, {
+    TweenLite.to($circle, 0.4, {
         x: e.clientX,
         y: e.clientY
     });
+}
+
+function handleMouseMove(e) {
+    // Check if the screen width is greater than 767 pixels (adjust as needed)
+    if (window.innerWidth > 767) {
+        moveCircle(e);
+    }
 }
 
 function hoverFunc(e) {
@@ -757,7 +764,7 @@ function unhoverFunc(e) {
   });
 }
 
-$(document).on('mousemove', moveCircle);
+$(window).on('mousemove', handleMouseMove);
 $("a").hover(hoverFunc, unhoverFunc);
 
 // Sticky Cursor with delay
@@ -939,7 +946,7 @@ function initVisualFilter() {
                 }, 300);
             }
         });
-        $('.data-btn').click(function() {
+        $('.first-work-category-btn').click(function() {
             if ($(this).hasClass('active')) {} else {
                 $('.toggle-row .btn-normal').removeClass('active');
                 $('.toggle-row .btn-normal').addClass('not-active');
@@ -948,11 +955,11 @@ function initVisualFilter() {
                 // Cookies.set("filter", "data", { expires: 1 });
                 setTimeout(function() {
                     $('.mouse-pos-list-image li, .mouse-pos-list-image-wrap li, .work-tiles li').removeClass('visible');
-                    $('.mouse-pos-list-image li.data, .mouse-pos-list-image-wrap li.data, .work-tiles li.data').addClass('visible');
+                    $('.mouse-pos-list-image li.first-work-category, .mouse-pos-list-image-wrap li.first-work-category, .work-tiles li.first-work-category').addClass('visible');
                 }, 300);
             }
         });
-        $('.development-btn').click(function() {
+        $('.second-work-category-btn').click(function() {
             if ($(this).hasClass('active')) {} else {
                 $('.toggle-row .btn-normal').removeClass('active');
                 $('.toggle-row .btn-normal').addClass('not-active');
@@ -961,7 +968,7 @@ function initVisualFilter() {
                 // Cookies.set("filter", "development", { expires: 1 });
                 setTimeout(function() {
                     $('.mouse-pos-list-image li, .mouse-pos-list-image-wrap li, .work-tiles li').removeClass('visible');
-                    $('.mouse-pos-list-image li.development, .mouse-pos-list-image-wrap li.development, .work-tiles li.development').addClass('visible');
+                    $('.mouse-pos-list-image li.second-work-category, .mouse-pos-list-image-wrap li.second-work-category, .work-tiles li.second-work-category').addClass('visible');
                 }, 300);
             }
         });

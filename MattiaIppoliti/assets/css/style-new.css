@@ -53,8 +53,8 @@ main.touch .main-wrap {
     background-color: #e9d245;
     width: 12px;
     height: 12px;
-    left: -15px; /* Adjusted the initial left position */
-    top: -15px;  /* Adjusted the initial top position */
+    left: -12px; /* Adjusted the initial left position */
+    top: -18px;  /* Adjusted the initial top position */
     border-radius: 100%;
     z-index: 10000;
     transform: scale(1);
