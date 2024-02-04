@@ -59,6 +59,7 @@
     --color-blue: #455CE9;
     --color-blue-dark: #334BD3;
     --color-gray: #999D9E;
+    --color-yellow: #e9d245;
     --color-lightgray: #E9EAEB;
     --color-white: #FFFFFF;
     --color-border: rgba(28, 29, 32, 0.175);
@@ -139,8 +140,8 @@ body {
 /* Selection */
 
 ::selection {
-    background-color: var(--color-blue-dark);
-    color: var(--color-white);
+    background-color: var(--color-yellow);
+    color: var(--color-blue-dark);
     text-shadow: none;
 }
 

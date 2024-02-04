@@ -50,7 +50,7 @@ main.touch .main-wrap {
 
 .second-circle {
     position: fixed;
-    background-color: #e9d245;
+    background-color: var(--color-yellow);
     width: 12px;
     height: 12px;
     left: -12px; /* Adjusted the initial left position */
