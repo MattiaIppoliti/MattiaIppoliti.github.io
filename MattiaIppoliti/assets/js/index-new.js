@@ -581,6 +581,16 @@ function initHamburgerNav() {
     // Open/close navigation when clicked .btn-hamburger
 
     $(document).ready(function() {
+
+        $(".btn-hamburger, .btn-menu").hover(
+            function () {
+                $(".second-circle").addClass('hide-circles');
+            },
+            function () {
+                $(".second-circle").removeClass('hide-circles');
+            }
+        );
+
         $(".btn-hamburger, .btn-menu").click(function() {
             if ($(".btn-hamburger, .btn-menu").hasClass('active')) {
                 $(".btn-hamburger, .btn-menu").removeClass('active');
@@ -661,6 +671,18 @@ function initMagneticButtons() {
             });
         }
 
+        $(document).ready(function() {
+
+            $(".magnetic, .work-items").hover(
+                function () {
+                    $(".second-circle").addClass('hide-circles');
+                },
+                function () {
+                    $(".second-circle").removeClass('hide-circles');
+                }
+            );
+        });
+
     }; // END : If screen is bigger as 540 px do magnetic
 
     // Mouse Enter
@@ -710,21 +732,15 @@ function initMagneticButtons() {
  * Sticky Cursor with Delay
  */
 
-/*
-// Second Mouse Cursor
+// Second Mouse Cursor [Ippoliti Mattia]
 
-var $circle = $('.second-circle'),
-    $follow = $('.second-circle-follow');
+var $circle = $('.second-circle')
 
 function moveCircle(e) {
-	TweenLite.to($circle, 0.3, {
-      x: e.clientX,
-      y: e.clientY
-  });
-	TweenLite.to($follow, 0.7, {
-      x: e.clientX,
-      y: e.clientY
-  });  
+    TweenLite.to($circle, 0.3, {
+        x: e.clientX,
+        y: e.clientY
+    });
 }
 
 function hoverFunc(e) {
@@ -732,9 +748,6 @@ function hoverFunc(e) {
     opacity: 1,
     scale: 0
   });
-  TweenLite.to($follow, 0.3, {
-      scale: 3
-  });  
 }
 
 function unhoverFunc(e) {
@@ -742,20 +755,16 @@ function unhoverFunc(e) {
     opacity: 1,
     scale: 1
   });
-  TweenLite.to($follow, 0.3, {
-      scale: 1
-  });  
 }
 
-$(window).on('mousemove', moveCircle);
-
+$(document).on('mousemove', moveCircle);
 $("a").hover(hoverFunc, unhoverFunc);
-*/
+
+// Sticky Cursor with delay
+// https://greensock.com/forums/topic/21161-animated-mouse-cursor/
 
 function initStickyCursorWithDelay() {
 
-    // Sticky Cursor with delay
-    // https://greensock.com/forums/topic/21161-animated-mouse-cursor/
     var cursorImage = $(".mouse-pos-list-image")
     var cursorBtn = $(".mouse-pos-list-btn");
     var cursorSpan = $(".mouse-pos-list-span");
@@ -808,6 +817,18 @@ function initStickyCursorWithDelay() {
         });
     }
 
+    $(document).ready(function() {
+
+        $(".mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span").hover(
+            function () {
+                $(".second-circle").addClass('hide-circles');
+            },
+            function () {
+                $(".second-circle").removeClass('hide-circles');
+            }
+        );
+    });
+
     $(document).on("mousemove", function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
@@ -833,6 +854,18 @@ function initStickyCursorWithDelay() {
     });
     $('main').on('mouseup', function() {
         $(".mouse-pos-list-btn, .mouse-pos-list-span").removeClass('pressed');
+    });
+
+    $(document).ready(function() {
+
+        $(".mouse-pos-list-image-wrap, .single-tile-wrap").hover(
+            function () {
+                $(".second-circle").addClass('hide-circles');
+            },
+            function () {
+                $(".second-circle").removeClass('hide-circles');
+            }
+        );
     });
 
     $('.mouse-pos-list-image-wrap li.visible').on('mouseenter', function() {
