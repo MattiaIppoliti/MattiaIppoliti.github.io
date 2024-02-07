@@ -1899,7 +1899,7 @@ main.touch .main-wrap {
         background: var(--color-blue);
     }
     50% {
-        background: #ff4444;
+        background: var(--color-yellow);
     }
     100% {
         background: var(--color-blue);

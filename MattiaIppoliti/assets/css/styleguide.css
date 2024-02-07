@@ -138,10 +138,9 @@ body {
 }
 
 /* Selection */
-
 ::selection {
-    background-color: var(--color-yellow);
-    color: var(--color-blue-dark);
+    background-color: var(--color-grey);
+    color: var(--color-yellow);
     text-shadow: none;
 }
 
