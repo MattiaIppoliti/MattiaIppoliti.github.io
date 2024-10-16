@@ -4,9 +4,7 @@
   <img width=800 src="https://cdn.ciaobang.com/image/work/github.png" />
 </picture>
 
-</div>  &nbsp;
-
-<div align="center">
+</div>
 
 Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
 
