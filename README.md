@@ -1,12 +1,10 @@
 # Mattia Website
 <div align="center">
 <picture>
-  <img width=800 src="https://cdn.ciaobang.com/image/work/github.png" />
+  <img width=800 src="https://cdn.ciaobang.com/image/work/github.png"/>
 </picture>
-
-</div>
-
 Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
+</div>
 
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
