@@ -16,18 +16,16 @@
 </div>
 
 <div align="center">
-
-[If you don't want use git](#if-you-don-t-want-use-git)  | [If you're comfortable with git](#if-you-re-confortable-with-git) | [Don't feel you aren't smart enough](#don-t-feel-you-aren-t-smart-enough) | [Enjoy](#enjoy)
-
-</div>
-
-
-<div align="center">
   
 Hi, click here: [https://mattiaippoliti.pages.dev/](https://mattiaippoliti.pages.dev/)
 
 </div>
 
+<div align="center">
+
+[If you don't want use git](#if-you-don-t-want-use-git)  | [If you're comfortable with git](#if-you-re-confortable-with-git) | [Don't feel you aren't smart enough](#don-t-feel-you-aren-t-smart-enough) | [Enjoy](#enjoy)
+
+</div>
 
 ### If you don't want to use git
 
