@@ -4,10 +4,11 @@
   <img width=800 src="https://cdn.ciaobang.com/image/work/github.png"/>
 </picture>
 </div>
-<div align="center">
+
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 [![Setup Automated](https://img.shields.io/badge/setup-automated-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
+<div align="center">
 Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
 </div>
 ## Table of Contents
