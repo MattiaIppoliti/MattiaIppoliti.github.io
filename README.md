@@ -1,5 +1,12 @@
 # Mattia Website
-[![Mattia Ippoliti Banner](https://mattiaippolitiwebsite.s3.amazonaws.com/ciao.jpg)](https://mattiaippoliti.github.io/MattiaIppoliti/) 
+<div align="center">
+<picture>
+  <img width=800 src="https://cdn.ciaobang.com/image/work/github.png" />
+</picture>
+
+</div>  &nbsp;
+
+<div align="center">
 
 Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
 
