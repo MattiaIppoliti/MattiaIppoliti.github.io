@@ -127,6 +127,7 @@ body {
     font-size: 16px;
     font-size: clamp(16px, 1.2vw, 19px);
     background-color: var(--color-dark);
+    cursor: url('/assets/img/Cursor.svg'), auto;
 }
 
 html,
@@ -172,6 +173,14 @@ svg,
 video {
     vertical-align: middle;
 }
+
+li:hover, 
+li a:hover, 
+li a .btn-text-inner:hover, 
+.btn-click:hover {
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
+}
+
 
 /* ------------------------- Typography -------------------------------------------------- */
 
@@ -440,7 +449,7 @@ video.overlay {
 }
 
 .btn input {
-    cursor: pointer;
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
 }
 
 .btn:hover {
@@ -452,7 +461,7 @@ video.overlay {
 }
 
 .btn-click {
-    cursor: pointer;
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
     border: 0;
     color: var(--primary-dark);
     background: transparent;
@@ -473,7 +482,7 @@ video.overlay {
 }
 
 .btn-click:hover {
-    cursor: pointer;
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
 }
 
 .btn-normal .btn-click {
@@ -1125,7 +1134,7 @@ main .btn-hamburger.active {
 
 .s-icon:hover {
     background: var(--secondary);
-    cursor: pointer;
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
 }
 
 .s-icon:hover .s-icon-wrap:nth-of-type(1) {
@@ -1431,7 +1440,7 @@ main .btn-hamburger.active {
 }
 
 .form .checkbox-button:hover {
-    cursor: pointer;
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
 }
 
 .form .checkbox-button input {

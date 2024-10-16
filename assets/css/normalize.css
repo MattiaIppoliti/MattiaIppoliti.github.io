@@ -302,7 +302,7 @@ html input[type="button"],
 input[type="reset"] {
     -webkit-appearance: button;
     /* 2 */
-    cursor: pointer;
+    cursor: url('/assets/img/Cursor_hover.svg'), auto;
     /* 3 */
 }
 
