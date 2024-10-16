@@ -3,49 +3,49 @@
 /* ------------------------- Fonts -------------------------------------------------- */
 
 @font-face {
-    font-family: 'Dennis Sans';
-    src: url('../fonts/NeueMontreal-Light.otf') format('opentype');
+    font-family: 'Uncut';
+    src: url('../fonts/UncutSans-Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: auto;
 }
 
 @font-face {
-    font-family: 'Dennis Sans';
-    src: url('../fonts/NeueMontreal-LightItalic.otf') format('opentype');
+    font-family: 'Uncut';
+    src: url('../fonts/UncutSans-LightItalic.woff2') format('woff2');
     font-weight: 300;
     font-style: italic;
     font-display: auto;
 }
 
 @font-face {
-    font-family: 'Dennis Sans';
-    src: url('../fonts/NeueMontreal-Regular.otf') format('opentype');
-    font-weight: 450;
+    font-family: 'Uncut';
+    src: url('../fonts/UncutSans-Regular.woff2') format('woff2');
+    font-weight: 650;
     font-style: normal;
     font-display: auto;
 }
 
 @font-face {
-    font-family: 'Dennis Sans';
-    src: url('../fonts/NeueMontreal-Italic.otf') format('opentype');
-    font-weight: 450;
+    font-family: 'Uncut';
+    src: url('../fonts/UncutSans-RegularItalic.woff2') format('woff2');
+    font-weight: 650;
     font-style: italic;
     font-display: auto;
 }
 
 @font-face {
-    font-family: 'Dennis Sans';
-    src: url('../fonts/NeueMontreal-Bold.otf') format('opentype');
-    font-weight: 800;
+    font-family: 'Uncut';
+    src: url('../fonts/UncutSans-Bold.woff2') format('woff2');
+    font-weight: 1000;
     font-style: normal;
     font-display: auto;
 }
 
 @font-face {
-    font-family: 'Dennis Sans';
-    src: url('../fonts/NeueMontreal-BoldItalic.otf') format('opentype');
-    font-weight: 800;
+    font-family: 'Uncut';
+    src: url('../fonts/UncutSans-BoldItalic.woff2') format('woff2');
+    font-weight: 1000;
     font-style: italic;
     font-display: auto;
 }
@@ -119,10 +119,10 @@ ul {
 
 body {
     -webkit-font-smoothing: antialiased;
-    font-family: 'Dennis Sans', sans-serif;
+    font-family: 'Uncut', sans-serif;
     color: var(--color-text);
     line-height: 1.6;
-    font-weight: 450;
+    font-weight: 650;
     font-style: normal;
     font-size: 16px;
     font-size: clamp(16px, 1.2vw, 19px);
@@ -192,7 +192,7 @@ em {
     padding: 0;
     margin: 0;
     font-style: normal;
-    font-weight: 450;
+    font-weight: 650;
     letter-spacing: normal;
 }
 
@@ -209,8 +209,8 @@ strong:last-child {
 }
 
 h1 {
-    font-family: 'Dennis Sans', sans-serif;
-    font-weight: 450;
+    font-family: 'Uncut', sans-serif;
+    font-weight: 650;
     font-style: normal;
     font-size: clamp(3.25em, 7vw, 8em);
     line-height: 1.065;
@@ -219,8 +219,8 @@ h1 {
 }
 
 h2 {
-    font-family: 'Dennis Sans', sans-serif;
-    font-weight: 450;
+    font-family: 'Uncut', sans-serif;
+    font-weight: 650;
     font-style: normal;
     font-size: calc(clamp(3.25em, 5vw, 4.5em) * .75);
     line-height: 1.065;
@@ -228,8 +228,8 @@ h2 {
 }
 
 h3 {
-    font-family: 'Dennis Sans', sans-serif;
-    font-weight: 450;
+    font-family: 'Uncut', sans-serif;
+    font-weight: 650;
     font-style: normal;
     font-size: clamp(2.66em, 4.65vw, 5.32em);
     line-height: 1.065;
@@ -237,8 +237,8 @@ h3 {
 }
 
 h4 {
-    font-family: 'Dennis Sans', sans-serif;
-    font-weight: 450;
+    font-family: 'Uncut', sans-serif;
+    font-weight: 650;
     font-style: normal;
     font-size: clamp(1.55em, 2.3vw, 2.5em);
     line-height: 1.45;
@@ -246,8 +246,8 @@ h4 {
 }
 
 h5 {
-    font-family: 'Dennis Sans', sans-serif;
-    font-weight: 450;
+    font-family: 'Uncut', sans-serif;
+    font-weight: 650;
     font-style: normal;
     font-size: .6em;
     line-height: 1.065;
@@ -258,8 +258,8 @@ h5 {
 }
 
 p {
-    font-family: 'Dennis Sans', sans-serif;
-    font-weight: 450;
+    font-family: 'Uncut', sans-serif;
+    font-weight: 650;
     font-style: normal;
     color: var(--text);
     font-size: 1em;
@@ -1285,7 +1285,7 @@ main .btn-hamburger.active {
     border: 0;
     background: transparent;
     border-radius: 0;
-    font-weight: 450;
+    font-weight: 650;
     font-size: 1em;
     color: var(--color-white);
     display: block;
@@ -1323,7 +1323,7 @@ main .btn-hamburger.active {
 .form .field::placeholder {
     color: var(--color-white);
     opacity: .33;
-    font-weight: 450;
+    font-weight: 650;
 }
 
 .form textarea.field {
@@ -1336,7 +1336,7 @@ main .btn-hamburger.active {
     display: block;
     margin-bottom: 0;
     color: var(--color-white);
-    font-weight: 450;
+    font-weight: 650;
     padding-top: 1.66em;
     transition: all .2s ease-in-out;
 }
@@ -1385,7 +1385,7 @@ main .btn-hamburger.active {
 .alert strong {
     color: var(--alert-error);
     font-size: 1em;
-    font-weight: 450;
+    font-weight: 650;
     line-height: 1rem;
     margin: 0;
 }
@@ -1423,7 +1423,7 @@ main .btn-hamburger.active {
     padding-left: 1.25em;
     align-items: center;
     font-size: 1em;
-    font-weight: 450;
+    font-weight: 650;
 }
 
 .form .checkbox-button:last-child {
@@ -1496,7 +1496,7 @@ main .btn-hamburger.active {
 
 .form .checkbox-button input:checked~span {
     color: var(--color-white);
-    font-weight: 450;
+    font-weight: 650;
     opacity: 1;
 }
 

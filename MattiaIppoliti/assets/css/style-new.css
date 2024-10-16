@@ -1419,7 +1419,7 @@ main.touch .main-wrap {
 
 .center-grid-btn-home {
     padding-top: calc(var(--section-padding) / 2);
-    padding-bottom: 0;
+    padding-bottom: 1em;
 }
 
 .center-grid-btn-archive {
@@ -2075,6 +2075,10 @@ main.touch .main-wrap {
     background: var(--color-lightgray);
     height: 10vw;
     display: none;
+}
+
+.uil-calendar-alt-row{
+    margin-top: 3em;
 }
 
 .about-image .flex-col:nth-child(1) {
