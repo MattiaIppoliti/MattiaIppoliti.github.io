@@ -3,20 +3,31 @@
 <picture>
   <img width=800 src="https://cdn.ciaobang.com/image/work/github.png"/>
 </picture>
-</div>
+</div>  &nbsp;
 
+<div align="center">
+
+![Last commit](https://img.shields.io/github/last-commit/ciaobang/site)
 [![Pull Requests Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 [![first-timers-only Friendly](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 [![Setup Automated](https://img.shields.io/badge/setup-automated-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
-<div align="center">
-Hi, click here: https://mattiaippoliti.github.io/MattiaIppoliti/
-</div>
-## Table of Contents
+![](https://img.shields.io/github/stars/ciaobang/site)
 
-- [If you don't want use git](#if-you-don-t-want-use-git)
-- [If you're comfortable with git](#if-you-re-confortable-with-git)
-- [Don't feel you aren't smart enough](#don-t-feel-you-aren-t-smart-enough)
-- [Enjoy](#enjoy)
+</div>
+
+<div align="center">
+
+[If you don't want use git](#if-you-don-t-want-use-git)  | [If you're comfortable with git](#if-you-re-confortable-with-git) | [Don't feel you aren't smart enough](#don-t-feel-you-aren-t-smart-enough) | [Enjoy](#enjoy)
+
+</div>
+
+
+<div align="center">
+  
+Hi, click here: [https://mattiaippoliti.pages.dev/](https://mattiaippoliti.pages.dev/)
+
+</div>
+
 
 ### If you don't want to use git
 
