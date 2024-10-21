@@ -822,6 +822,11 @@ main.touch .main-wrap {
     padding: 0 3vw;
 }
 
+.name-wrap .no-select.once-in.once-in-secondary {
+    font-family: 'Gulax';
+    font-weight: 1000;
+}
+
 .home-header .big-name h1 {
     position: relative;
     display: flex;

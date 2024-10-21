@@ -37,7 +37,15 @@
 @font-face {
     font-family: 'Uncut';
     src: url('../fonts/UncutSans-Bold.woff2') format('woff2');
-    font-weight: 1000;
+    font-weight: 800;
+    font-style: normal;
+    font-display: auto;
+}
+
+@font-face {
+    font-family: 'Gulax';
+    src: url('../fonts/Gulax-Regular.woff2') format('woff2');
+    font-weight: 800;
     font-style: normal;
     font-display: auto;
 }
@@ -45,7 +53,7 @@
 @font-face {
     font-family: 'Uncut';
     src: url('../fonts/UncutSans-BoldItalic.woff2') format('woff2');
-    font-weight: 1000;
+    font-weight: 800;
     font-style: italic;
     font-display: auto;
 }
@@ -219,7 +227,7 @@ strong:last-child {
 
 h1 {
     font-family: 'Uncut';
-    font-weight: 1000;
+    font-weight: 800;
     font-style: normal;
     font-size: clamp(3.25em, 7vw, 8em);
     line-height: 1.065;
