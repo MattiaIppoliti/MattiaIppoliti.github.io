@@ -284,6 +284,14 @@ main.touch .main-wrap {
     }
 }
 
+/* Media query for 12 to 15-inch screens (between 1024px and 1600px) */
+@media only screen and (min-width: 1024px) and (max-width: 1600px) {
+
+    .btn-text-menu {
+        font-size: 0.85em; /* Ensure button text size is also smaller */
+    }
+}
+
 /* ------------------------- Fixed Nav -------------------------------------------------- */
 
 .fixed-nav-back {
