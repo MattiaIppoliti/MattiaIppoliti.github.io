@@ -830,7 +830,7 @@ main.touch .main-wrap {
     padding: 0 3vw;
 }
 
-.name-wrap .no-select.once-in.once-in-secondary {
+.name-wrap .no-select {
     font-family: 'Gulax';
     font-weight: 1000;
 }
