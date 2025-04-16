@@ -1186,6 +1186,7 @@ function initTimeZone() {
     // https://stackoverflow.com/questions/63572780/how-to-update-intl-datetimeformat-with-new-date
 
     const timeSpan = document.querySelector("#timeSpan");
+    const copyrightYear = document.querySelector(".credits p");
 
     const optionsTime = {
         timeZone: 'Europe/Amsterdam',
@@ -1200,6 +1201,11 @@ function initTimeZone() {
     };
 
     const formatter = new Intl.DateTimeFormat([], optionsTime);
+    
+    // Aggiorna l'anno del copyright una sola volta all'avvio
+    updateCopyrightYear();
+    
+    // Aggiorna l'orologio ogni secondo
     updateTime();
     setInterval(updateTime, 1000);
 
@@ -1208,7 +1214,11 @@ function initTimeZone() {
         const formattedDateTime = formatter.format(dateTime);
         timeSpan.textContent = formattedDateTime;
     }
-
+    
+    function updateCopyrightYear() {
+        const currentYear = new Date().getFullYear();
+        copyrightYear.textContent = `${currentYear} © Edition`;
+    }
 }
 
 /**
