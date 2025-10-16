@@ -148,16 +148,17 @@ body {
 
 /* Selection */
 ::selection {
-    background-color: var(--color-grey);
-    color: var(--color-yellow);
+    background-color: var(--color-yellow);
+    color: var(--color-blue-dark);
     text-shadow: none;
 }
 
 ::-moz-selection {
-    background-color: var(--color-blue);
-    color: var(--color-white);
+    background-color: var(--color-yellow);
+    color: var(--color-blue-dark);
     text-shadow: none;
 }
+
 
 canvas,
 img,
