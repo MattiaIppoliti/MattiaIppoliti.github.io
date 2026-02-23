@@ -294,13 +294,29 @@ main.touch .main-wrap {
 
 /* ------------------------- Dynamic Notch -------------------------------------------------- */
 
+:root {
+    --dynamic-notch-safe-top: 0px;
+}
+
+@supports (top: constant(safe-area-inset-top)) {
+    :root {
+        --dynamic-notch-safe-top: constant(safe-area-inset-top);
+    }
+}
+
+@supports (top: env(safe-area-inset-top)) {
+    :root {
+        --dynamic-notch-safe-top: env(safe-area-inset-top);
+    }
+}
+
 .dynamic-notch {
     --dynamic-notch-cursor: url('/assets/img/Cursor_hover.svg') 15 15, default;
     --dynamic-notch-shape-closed: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 215 33'%3E%3Cpath d='M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0H215L213.502 -1.90735e-06L0 0H9.85197Z' fill='white'/%3E%3C/svg%3E");
     --dynamic-notch-shape-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 608 143'%3E%3Cg transform='translate(-35 -35)'%3E%3Cpath d='M57 35C68.0457 35 77 43.9543 77 55V137.5C77 159.591 94.9086 177.5 117 177.5H562C584.091 177.5 602 159.591 602 137.5V55C602 43.9543 610.954 35 622 35H643H35H57Z' fill='white'/%3E%3C/g%3E%3C/svg%3E");
     --dynamic-notch-shape: var(--dynamic-notch-shape-closed);
     position: fixed;
-    top: 0;
+    top: var(--dynamic-notch-safe-top, 0px);
     left: 50%;
     transform: translateX(-50%);
     z-index: 99;
@@ -594,7 +610,7 @@ main.touch .main-wrap {
     flex-direction: column;
     min-width: 0;
     max-width: 50%;
-    line-height: 1.08;
+    line-height: 1.3;
 }
 
 .dynamic-notch.is-expanded .dynamic-notch-text {
@@ -859,7 +875,7 @@ main.touch .main-wrap {
 
 @media screen and (max-width: 540px) {
     .dynamic-notch {
-        top: 0;
+        top: var(--dynamic-notch-safe-top, 0px);
         --dynamic-notch-shape-closed: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 215 33'%3E%3Cpath d='M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0H215H0H9.85197Z' fill='white'/%3E%3C/svg%3E");
         --dynamic-notch-shape-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 382 120'%3E%3Cpath d='M32.0625 19.6875C38.2757 19.6875 43.3125 24.7243 43.3125 30.9375V77.3438C43.3125 89.7702 53.3861 99.8438 65.8125 99.8438H316.125C328.551 99.8438 338.625 89.7702 338.625 77.3438V30.9375C338.625 24.7243 343.662 19.6875 349.875 19.6875H361.688H19.6875H32.0625Z' fill='white'/%3E%3C/svg%3E");
     }

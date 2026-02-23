@@ -1221,7 +1221,7 @@ function initDynamicNotch() {
                         </a>
                         <div class="dynamic-notch-text">
                             <span class="dynamic-notch-name">Mattia Ippoliti</span>
-                            <span class="dynamic-notch-role">Engineer</span>
+                            <span class="dynamic-notch-role">Software Engineer</span>
                         </div>
                         <span class="dynamic-notch-time">--:--</span>
                         <div class="btn btn-link btn-link-external dynamic-notch-mobile-available">
