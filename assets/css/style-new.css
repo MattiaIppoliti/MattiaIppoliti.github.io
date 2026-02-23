@@ -361,10 +361,13 @@ main.touch .main-wrap {
 .dynamic-notch-surface {
     width: 100%;
     height: 100%;
-    background: #1c1d20;
+    background: rgba(18, 19, 23, .52);
     color: var(--color-white);
     border-radius: 0;
-    box-shadow: 0 .85rem 1.7rem rgba(0, 0, 0, .3);
+    border: 1px solid rgba(242, 242, 242, .08);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .28), 0 3px 8px rgba(0, 0, 0, .28);
+    backdrop-filter: blur(18px) saturate(102%);
+    -webkit-backdrop-filter: blur(18px) saturate(102%);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -387,8 +390,8 @@ main.touch .main-wrap {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(115, 121, 132, .12) 0%, rgba(98, 104, 116, .12) 100%);
-    opacity: .45;
+    background: linear-gradient(180deg, rgba(242, 242, 242, .045) 0%, rgba(242, 242, 242, 0) 62%);
+    opacity: .32;
     pointer-events: none;
     z-index: 2;
     mix-blend-mode: normal;
@@ -400,17 +403,17 @@ main.touch .main-wrap {
     position: absolute;
     inset: 0;
     padding: 2.8px;
-    background-image: radial-gradient(52% 112% at center center, rgba(244, 247, 253, .86) 0%, rgba(223, 230, 241, .52) 44%, rgba(198, 209, 226, .18) 62%, rgba(176, 188, 208, 0) 80%);
+    background-image: radial-gradient(38% 132% at 50% 118%, rgba(255, 255, 255, 0.615) 0%, rgba(255, 255, 255, .14) 42%, rgba(255, 255, 255, .05) 62%, rgba(255, 255, 255, 0) 80%);
     background-repeat: no-repeat;
-    background-size: 62% 138%;
-    background-position: -18% 52%;
+    background-size: 120% 150%;
+    background-position: 50% 100%;
     filter: blur(5.6px);
-    opacity: .22;
+    opacity: .16;
     pointer-events: none;
     z-index: 3;
     mix-blend-mode: screen;
-    -webkit-clip-path: inset(6% 0 0 0);
-    clip-path: inset(6% 0 0 0);
+    -webkit-clip-path: inset(34% 0 0 0);
+    clip-path: inset(34% 0 0 0);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -880,11 +883,11 @@ main.touch .main-wrap {
     }
     .dynamic-notch-surface::after {
         padding: 1.6px;
-        background-size: 68% 46%;
-        background-position: -22% 54%;
-        filter: blur(8.4px);
-        -webkit-clip-path: inset(8% 0 0 0);
-        clip-path: inset(8% 0 0 0);
+        background-size: 128% 158%;
+        background-position: 50% 100%;
+        filter: blur(7px);
+        -webkit-clip-path: inset(40% 0 0 0);
+        clip-path: inset(40% 0 0 0);
     }
     .dynamic-notch-border {
         top: 24px;
