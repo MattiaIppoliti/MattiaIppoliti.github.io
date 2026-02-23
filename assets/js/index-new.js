@@ -6,6 +6,8 @@ const body = document.body;
 const select = (e) => document.querySelector(e);
 const selectAll = (e) => document.querySelectorAll(e);
 //const container = select('.site-main');
+let dynamicNotchCleanup = null;
+let dynamicNotchTimeline = null;
 
 initPageTransitions();
 
@@ -515,6 +517,7 @@ function initScript() {
     initWindowInnerheight();
     initCheckTouchDevice();
     initHamburgerNav();
+    initDynamicNotch();
     initMagneticButtons();
     initStickyCursorWithDelay();
     initVisualFilter();
@@ -752,16 +755,16 @@ function handleMouseMove(e) {
 
 function hoverFunc(e) {
   TweenLite.to($circle, 0.3, {
-    opacity: 1,
-    scale: 0
-  });
+        opacity: 1,
+        scale: 0
+    });
 }
 
 function unhoverFunc(e) {
   TweenLite.to($circle, 0.3, {
-    opacity: 1,
-    scale: 1
-  });
+        opacity: 1,
+        scale: 1
+    });
 }
 
 $(window).on('mousemove', handleMouseMove);
@@ -1173,6 +1176,367 @@ function initContactForm() {
         }).focusout();
     });
 
+}
+
+/**
+ * Dynamic Notch
+ */
+function initDynamicNotch() {
+
+    if (dynamicNotchCleanup) {
+        dynamicNotchCleanup();
+        dynamicNotchCleanup = null;
+    }
+
+    const oldNotch = document.querySelector('.dynamic-notch');
+    if (oldNotch) {
+        oldNotch.remove();
+    }
+
+    const notch = document.createElement('div');
+    notch.className = 'dynamic-notch';
+    notch.innerHTML = `
+        <div class="dynamic-notch-frame">
+            <div class="dynamic-notch-border dynamic-notch-border-left" aria-hidden="true">
+                <div class="dynamic-notch-border-shadow"></div>
+            </div>
+            <div class="dynamic-notch-border dynamic-notch-border-right" aria-hidden="true">
+                <div class="dynamic-notch-border-shadow"></div>
+            </div>
+            <div class="dynamic-notch-shell" tabindex="0" aria-expanded="false" aria-label="Open profile quick links">
+                <div class="dynamic-notch-surface">
+                    <svg class="dynamic-notch-trace dynamic-notch-trace-closed" viewBox="0 0 215 33" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <path class="dynamic-notch-trace-base" d="M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0H215L213.502 0H0H9.85197Z"></path>
+                        <path class="dynamic-notch-trace-sweep-halo" pathLength="100" d="M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0"></path>
+                        <path class="dynamic-notch-trace-sweep-core" pathLength="100" d="M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0"></path>
+                    </svg>
+                    <svg class="dynamic-notch-trace dynamic-notch-trace-open" viewBox="0 0 608 143" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                        <path class="dynamic-notch-trace-base" d="M22 0C33.0457 0 42 8.9543 42 20V102.5C42 124.591 59.9086 142.5 82 142.5H527C549.091 142.5 567 124.591 567 102.5V20C567 8.9543 575.954 0 587 0H608H0H22Z"></path>
+                        <path class="dynamic-notch-trace-sweep-halo" pathLength="100" d="M22 0C33.0457 0 42 8.9543 42 20V102.5C42 124.591 59.9086 142.5 82 142.5H527C549.091 142.5 567 124.591 567 102.5V20C567 8.9543 575.954 0 587 0"></path>
+                        <path class="dynamic-notch-trace-sweep-core" pathLength="100" d="M22 0C33.0457 0 42 8.9543 42 20V102.5C42 124.591 59.9086 142.5 82 142.5H527C549.091 142.5 567 124.591 567 102.5V20C567 8.9543 575.954 0 587 0"></path>
+                    </svg>
+                    <div class="dynamic-notch-compact">
+                        <img class="dynamic-notch-avatar" src="/assets/img/profile_circular.png" alt="Mattia Ippoliti profile picture" />
+                        <div class="dynamic-notch-text">
+                            <span class="dynamic-notch-name">Mattia Ippoliti</span>
+                            <span class="dynamic-notch-role">Engineer</span>
+                        </div>
+                        <span class="dynamic-notch-time">--:--</span>
+                    </div>
+                    <div class="dynamic-notch-expanded" aria-hidden="true">
+                        <div class="dynamic-notch-links">
+                            <div class="btn btn-link btn-link-external dynamic-notch-link-btn">
+                                <a href="https://www.linkedin.com/in/mattiaippoliti/" target="_blank" rel="noopener noreferrer" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="LinkedIn">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">LinkedIn</span>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="btn btn-link btn-link-external dynamic-notch-link-btn">
+                                <a href="https://github.com/MattiaIppoliti" target="_blank" rel="noopener noreferrer" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="GitHub">
+                                    <span class="btn-text">
+                                        <span class="btn-text-inner">GitHub</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="btn btn-link btn-link-external dynamic-notch-available">
+                            <a href="/contacts/" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="Go to contact page">
+                                <span class="btn-text">
+                                    <span class="dynamic-notch-sonar" aria-hidden="true"></span>
+                                    <span class="btn-text-inner">Available</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    body.appendChild(notch);
+
+    const shell = notch.querySelector('.dynamic-notch-shell');
+    const expanded = notch.querySelector('.dynamic-notch-expanded');
+    const timeNode = notch.querySelector('.dynamic-notch-time');
+    const linkNodes = Array.from(notch.querySelectorAll('.dynamic-notch-expanded a'));
+
+    if (!shell || !expanded || !timeNode) {
+        notch.remove();
+        return;
+    }
+
+    const formatter = new Intl.DateTimeFormat([], {
+        timeZone: 'Europe/Amsterdam',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    });
+
+    const getNotchSizes = () => {
+        const isSmallScreen = window.innerWidth <= 540;
+        const desktopClosedWidth = 397.44;
+        const desktopOpenWidth = 466.82;
+        const desktopClosedHeight = 60;
+        const desktopOpenHeight = 124;
+
+        return {
+            closedWidth: isSmallScreen
+                ? Math.max(238, Math.min(window.innerWidth - 20, desktopClosedWidth))
+                : Math.min(desktopClosedWidth, window.innerWidth - 24),
+            openWidth: isSmallScreen
+                ? Math.max(268, Math.min(window.innerWidth - 12, desktopOpenWidth))
+                : Math.min(desktopOpenWidth, window.innerWidth - 24),
+            closedHeight: isSmallScreen ? 58 : desktopClosedHeight,
+            openHeight: isSmallScreen ? 108 : desktopOpenHeight
+        };
+    };
+
+    const isTouchPointer = () => window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+    const setLinksFocusable = (isExpanded) => {
+        shell.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        expanded.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
+        linkNodes.forEach((link) => {
+            link.tabIndex = isExpanded ? 0 : -1;
+        });
+    };
+
+    const syncTime = () => {
+        timeNode.textContent = formatter.format(new Date());
+    };
+
+    syncTime();
+    const timeInterval = window.setInterval(syncTime, 1000);
+
+    let isExpanded = false;
+
+    const syncNotchRowSizing = (sizes) => {
+        shell.style.setProperty('--dynamic-notch-compact-height', `${sizes.closedHeight}px`);
+        shell.style.setProperty('--dynamic-notch-expanded-row-height', `${sizes.openHeight - sizes.closedHeight}px`);
+    };
+
+    const animateNotchState = (shouldExpand) => {
+        if (isExpanded === shouldExpand && !dynamicNotchTimeline?.isActive()) {
+            return;
+        }
+
+        isExpanded = shouldExpand;
+        notch.classList.toggle('is-expanded', shouldExpand);
+        setLinksFocusable(shouldExpand);
+
+        if (dynamicNotchTimeline) {
+            dynamicNotchTimeline.kill();
+        }
+
+        const sizes = getNotchSizes();
+        syncNotchRowSizing(sizes);
+
+        if (shouldExpand) {
+            dynamicNotchTimeline = gsap.timeline();
+            dynamicNotchTimeline
+                .to(shell, {
+                    width: sizes.openWidth,
+                    height: sizes.openHeight,
+                    duration: 0.8,
+                    ease: 'elastic.out(1, 0.72)'
+                }, 0)
+                .to(expanded, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.45,
+                    ease: 'power3.out'
+                }, 0.22);
+        } else {
+            dynamicNotchTimeline = gsap.timeline();
+            dynamicNotchTimeline
+                .to(expanded, {
+                    autoAlpha: 0,
+                    y: 12,
+                    duration: 0.22,
+                    ease: 'power2.in'
+                }, 0)
+                .to(shell, {
+                    width: sizes.closedWidth,
+                    height: sizes.closedHeight,
+                    duration: 0.8,
+                    ease: 'elastic.out(1, 0.72)'
+                }, 0.04);
+        }
+    };
+
+    const resizeNotch = () => {
+        const sizes = getNotchSizes();
+        syncNotchRowSizing(sizes);
+        gsap.set(shell, {
+            width: isExpanded ? sizes.openWidth : sizes.closedWidth,
+            height: isExpanded ? sizes.openHeight : sizes.closedHeight
+        });
+    };
+
+    const syncMenuLayerState = () => {
+        const currentMain = document.querySelector('main');
+        notch.classList.toggle('is-nav-obscured', Boolean(currentMain && currentMain.classList.contains('nav-active')));
+    };
+
+    const setSecondCursorHiddenForNotch = (isHidden) => {
+        const secondCursor = document.querySelector('.second-circle');
+        if (!secondCursor || window.innerWidth <= 767) {
+            return;
+        }
+        secondCursor.classList.toggle('hide-circles', Boolean(isHidden));
+    };
+
+    const handleMouseEnter = () => {
+        if (!isTouchPointer()) {
+            setSecondCursorHiddenForNotch(true);
+            animateNotchState(true);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (!isTouchPointer() && !notch.contains(document.activeElement)) {
+            animateNotchState(false);
+        }
+        setSecondCursorHiddenForNotch(false);
+    };
+
+    const handleFocusIn = () => {
+        animateNotchState(true);
+    };
+
+    const handleFocusOut = (event) => {
+        const nextFocusedNode = event.relatedTarget;
+        if (nextFocusedNode && notch.contains(nextFocusedNode)) {
+            return;
+        }
+        if (!notch.classList.contains('is-touch-expanded')) {
+            animateNotchState(false);
+        }
+    };
+
+    const handleTouchToggle = (event) => {
+        if (!isTouchPointer()) {
+            return;
+        }
+        if (event.target.closest('a')) {
+            if (notch.classList.contains('is-expanded')) {
+                notch.classList.remove('is-touch-expanded');
+                animateNotchState(false);
+            }
+            return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        const shouldExpand = !notch.classList.contains('is-expanded');
+        notch.classList.toggle('is-touch-expanded', shouldExpand);
+        animateNotchState(shouldExpand);
+    };
+
+    const handleOutsidePointer = (event) => {
+        if (!notch.classList.contains('is-touch-expanded')) {
+            return;
+        }
+        if (notch.contains(event.target)) {
+            return;
+        }
+        notch.classList.remove('is-touch-expanded');
+        animateNotchState(false);
+    };
+
+    const handleKeyboardToggle = (event) => {
+        if ((event.key === 'Enter' || event.key === ' ') && event.target !== shell) {
+            return;
+        }
+
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            const shouldExpand = !notch.classList.contains('is-expanded');
+            notch.classList.toggle('is-touch-expanded', shouldExpand);
+            animateNotchState(shouldExpand);
+        }
+
+        if (event.key === 'Escape') {
+            notch.classList.remove('is-touch-expanded');
+            animateNotchState(false);
+            shell.blur();
+        }
+    };
+
+    const mainNode = document.querySelector('main');
+    const mainObserver = mainNode
+        ? new MutationObserver(syncMenuLayerState)
+        : null;
+
+    if (mainObserver && mainNode) {
+        mainObserver.observe(mainNode, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+
+    const collapseFromLinkInteraction = () => {
+        notch.classList.remove('is-touch-expanded');
+        animateNotchState(false);
+        if (document.activeElement && notch.contains(document.activeElement)) {
+            document.activeElement.blur();
+        }
+        shell.blur();
+    };
+
+    const handleLinkPointerDown = () => {
+        collapseFromLinkInteraction();
+    };
+
+    const handleLinkClick = () => {
+        collapseFromLinkInteraction();
+    };
+
+    gsap.set(expanded, {
+        autoAlpha: 0,
+        y: 12
+    });
+    setLinksFocusable(false);
+    resizeNotch();
+    syncMenuLayerState();
+
+    notch.addEventListener('mouseenter', handleMouseEnter);
+    notch.addEventListener('mouseleave', handleMouseLeave);
+    notch.addEventListener('focusin', handleFocusIn);
+    notch.addEventListener('focusout', handleFocusOut);
+    shell.addEventListener('click', handleTouchToggle);
+    shell.addEventListener('keydown', handleKeyboardToggle);
+    linkNodes.forEach((link) => {
+        link.addEventListener('pointerdown', handleLinkPointerDown);
+        link.addEventListener('click', handleLinkClick);
+    });
+    document.addEventListener('pointerdown', handleOutsidePointer);
+    window.addEventListener('resize', resizeNotch);
+
+    dynamicNotchCleanup = () => {
+        window.clearInterval(timeInterval);
+        window.removeEventListener('resize', resizeNotch);
+        document.removeEventListener('pointerdown', handleOutsidePointer);
+        linkNodes.forEach((link) => {
+            link.removeEventListener('pointerdown', handleLinkPointerDown);
+            link.removeEventListener('click', handleLinkClick);
+        });
+        shell.removeEventListener('keydown', handleKeyboardToggle);
+        shell.removeEventListener('click', handleTouchToggle);
+        notch.removeEventListener('focusout', handleFocusOut);
+        notch.removeEventListener('focusin', handleFocusIn);
+        notch.removeEventListener('mouseleave', handleMouseLeave);
+        notch.removeEventListener('mouseenter', handleMouseEnter);
+        if (mainObserver) {
+            mainObserver.disconnect();
+        }
+        if (dynamicNotchTimeline) {
+            dynamicNotchTimeline.kill();
+            dynamicNotchTimeline = null;
+        }
+        setSecondCursorHiddenForNotch(false);
+        notch.remove();
+    };
 }
 
 /**

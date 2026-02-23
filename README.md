@@ -17,7 +17,7 @@
 
 <div align="center">
   
-Hi, click here: [https://mattiaippoliti.pages.dev/](https://mattiaippoliti.pages.dev/)
+Hi, click here: [https://mattia.app/](https://mattia.app/)
 
 </div>
 
@@ -66,4 +66,4 @@ Mark all boxes with X after you completed your changes:
 
 ### Enjoy!
 
-[Enjoy the website!](https://mattiaippoliti.pages.dev/) 
+[Enjoy the website!](https://mattia.app/) 
