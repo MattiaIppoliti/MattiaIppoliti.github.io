@@ -579,6 +579,13 @@ main.touch .main-wrap {
     border: 1px solid rgba(255, 255, 255, .2);
 }
 
+.dynamic-notch-avatar-link {
+    display: inline-flex;
+    flex: 0 0 auto;
+    line-height: 0;
+    text-decoration: none;
+}
+
 .dynamic-notch-text {
     display: flex;
     flex-direction: column;
@@ -684,6 +691,20 @@ main.touch .main-wrap {
     padding: 0;
 }
 
+.dynamic-notch-icon {
+    display: none;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+}
+
+.dynamic-notch-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: currentColor;
+}
+
 .dynamic-notch-links .btn-text-inner {
     font-size: 13px;
     line-height: 1.1;
@@ -716,12 +737,18 @@ main.touch .main-wrap {
     color: #fff;
 }
 
-.dynamic-notch-available {
+.dynamic-notch-mobile-available {
+    display: none;
+}
+
+.dynamic-notch-available,
+.dynamic-notch-mobile-available {
     margin: 0;
     z-index: 1;
 }
 
-.dynamic-notch-available .btn-click {
+.dynamic-notch-available .btn-click,
+.dynamic-notch-mobile-available .btn-click {
     margin: 0;
     min-width: 0;
     width: auto;
@@ -731,7 +758,8 @@ main.touch .main-wrap {
     padding: 0;
 }
 
-.dynamic-notch-available .btn-text {
+.dynamic-notch-available .btn-text,
+.dynamic-notch-mobile-available .btn-text {
     width: auto;
     height: auto;
     padding: 0;
@@ -740,7 +768,8 @@ main.touch .main-wrap {
     gap: 6px;
 }
 
-.dynamic-notch-available .btn-text-inner {
+.dynamic-notch-available .btn-text-inner,
+.dynamic-notch-mobile-available .btn-text-inner {
     color: #29f77a;
     font-size: 13px;
     line-height: 1.4;
@@ -749,23 +778,30 @@ main.touch .main-wrap {
     white-space: nowrap;
 }
 
-.dynamic-notch-available.btn-link.btn-link-external .btn-click::after {
+.dynamic-notch-available.btn-link.btn-link-external .btn-click::after,
+.dynamic-notch-mobile-available.btn-link.btn-link-external .btn-click::after {
     bottom: -1px;
     background: rgba(41, 247, 122, .6);
 }
 
 .dynamic-notch-available a:hover,
-.dynamic-notch-available a:focus-visible {
+.dynamic-notch-available a:focus-visible,
+.dynamic-notch-mobile-available a:hover,
+.dynamic-notch-mobile-available a:focus-visible {
     transform: translateY(-1px) rotate(.001deg);
 }
 
 .dynamic-notch-available.btn-link.btn-link-external .btn-click:hover::after,
-.dynamic-notch-available.btn-link.btn-link-external .btn-click:focus-visible::after {
+.dynamic-notch-available.btn-link.btn-link-external .btn-click:focus-visible::after,
+.dynamic-notch-mobile-available.btn-link.btn-link-external .btn-click:hover::after,
+.dynamic-notch-mobile-available.btn-link.btn-link-external .btn-click:focus-visible::after {
     transform: translate(-50%, -50%) scale(1, 1) rotate(.001deg);
 }
 
 .dynamic-notch-available .btn-click:hover .btn-text-inner,
-.dynamic-notch-available .btn-click:focus-visible .btn-text-inner {
+.dynamic-notch-available .btn-click:focus-visible .btn-text-inner,
+.dynamic-notch-mobile-available .btn-click:hover .btn-text-inner,
+.dynamic-notch-mobile-available .btn-click:focus-visible .btn-text-inner {
     color: #49ff96;
 }
 
@@ -821,6 +857,8 @@ main.touch .main-wrap {
 @media screen and (max-width: 540px) {
     .dynamic-notch {
         top: 0;
+        --dynamic-notch-shape-closed: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 215 33'%3E%3Cpath d='M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0H215H0H9.85197Z' fill='white'/%3E%3C/svg%3E");
+        --dynamic-notch-shape-open: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 382 120'%3E%3Cpath d='M32.0625 19.6875C38.2757 19.6875 43.3125 24.7243 43.3125 30.9375V77.3438C43.3125 89.7702 53.3861 99.8438 65.8125 99.8438H316.125C328.551 99.8438 338.625 89.7702 338.625 77.3438V30.9375C338.625 24.7243 343.662 19.6875 349.875 19.6875H361.688H19.6875H32.0625Z' fill='white'/%3E%3C/svg%3E");
     }
     .dynamic-notch-shell {
         max-width: calc(100vw - 16px);
@@ -872,53 +910,110 @@ main.touch .main-wrap {
         border-top-left-radius: 24px;
     }
     .dynamic-notch-compact {
-        padding: 6px 16px;
+        padding: 4px 10px;
         gap: 8px;
-    }
-    .dynamic-notch.is-expanded .dynamic-notch-compact {
-        padding-left: 24px;
-        padding-right: 24px;
+        justify-content: flex-start;
+        position: relative;
     }
     .dynamic-notch-avatar {
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+    }
+    .dynamic-notch-text {
+        display: none;
+    }
+    .dynamic-notch-time {
+        font-size: 11px;
+        margin-left: 0;
+        text-align: center;
+        letter-spacing: -.01em;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+    }
+    .dynamic-notch-mobile-available {
+        display: block;
+        margin-left: auto;
+    }
+    .dynamic-notch-mobile-available .btn-text {
+        gap: 4px;
+    }
+    .dynamic-notch-mobile-available .btn-text-inner {
+        font-size: 9px;
+        line-height: 1.1;
+    }
+    .dynamic-notch-mobile-available .dynamic-notch-sonar {
+        width: 5px;
+        height: 5px;
+        box-shadow: 0 0 6px rgba(0, 255, 111, .65), 0 0 10px rgba(0, 255, 111, .32);
+    }
+    .dynamic-notch-mobile-available .dynamic-notch-sonar::after {
         width: 30px;
         height: 30px;
     }
-    .dynamic-notch-name {
-        font-size: 13px;
-    }
-    .dynamic-notch-role {
-        font-size: 13px;
-    }
-    .dynamic-notch-time {
-        font-size: 13px;
+    .dynamic-notch.is-expanded .dynamic-notch-compact {
+        display: none;
     }
     .dynamic-notch-expanded {
         padding: 6px 16px;
     }
     .dynamic-notch.is-expanded .dynamic-notch-expanded {
-        padding-left: 24px;
-        padding-right: 24px;
+        position: absolute;
+        inset: 0;
+        height: auto;
+        padding: 0 20px;
+        justify-content: center;
     }
     .dynamic-notch-links a {
         width: auto;
         height: auto;
     }
-
     .dynamic-notch-links {
-        gap: 16px;
+        gap: 12px;
+        width: 100%;
+        justify-content: center;
     }
     .dynamic-notch.is-expanded .dynamic-notch-links {
-        margin-left: 10px;
+        margin-left: 0;
     }
-
+    .dynamic-notch-link-btn .btn-click.magnetic {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, .08);
+        border: 1px solid rgba(255, 255, 255, .22);
+        transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .dynamic-notch-link-btn.btn-link.btn-link-external .btn-click::after {
+        display: none;
+    }
+    .dynamic-notch-links .btn-text {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .dynamic-notch-links .dynamic-notch-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
     .dynamic-notch-links .btn-text-inner {
-        font-size: 11px;
+        display: none;
+    }
+    .dynamic-notch-links .btn-link .btn-click:hover,
+    .dynamic-notch-links .btn-link .btn-click:focus-visible {
+        background: rgba(255, 255, 255, .16);
+        border-color: rgba(255, 255, 255, .36);
     }
     .dynamic-notch-available {
-        padding: 0;
-    }
-    .dynamic-notch-available .btn-text-inner {
-        font-size: 11px;
+        display: none;
     }
 }
 

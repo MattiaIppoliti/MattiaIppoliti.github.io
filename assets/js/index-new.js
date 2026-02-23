@@ -1216,18 +1216,33 @@ function initDynamicNotch() {
                         <path class="dynamic-notch-trace-sweep-core" pathLength="100" d="M22 0C33.0457 0 42 8.9543 42 20V102.5C42 124.591 59.9086 142.5 82 142.5H527C549.091 142.5 567 124.591 567 102.5V20C567 8.9543 575.954 0 587 0"></path>
                     </svg>
                     <div class="dynamic-notch-compact">
-                        <img class="dynamic-notch-avatar" src="/assets/img/profile_circular.png" alt="Mattia Ippoliti profile picture" />
+                        <a href="/about/" class="dynamic-notch-avatar-link" aria-label="Go to about page">
+                            <img class="dynamic-notch-avatar" src="/assets/img/profile_circular.png" alt="Mattia Ippoliti profile picture" />
+                        </a>
                         <div class="dynamic-notch-text">
                             <span class="dynamic-notch-name">Mattia Ippoliti</span>
                             <span class="dynamic-notch-role">Engineer</span>
                         </div>
                         <span class="dynamic-notch-time">--:--</span>
+                        <div class="btn btn-link btn-link-external dynamic-notch-mobile-available">
+                            <a href="/contacts/" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="Go to contact page">
+                                <span class="btn-text">
+                                    <span class="dynamic-notch-sonar" aria-hidden="true"></span>
+                                    <span class="btn-text-inner">Contact!</span>
+                                </span>
+                            </a>
+                        </div>
                     </div>
                     <div class="dynamic-notch-expanded" aria-hidden="true">
                         <div class="dynamic-notch-links">
                             <div class="btn btn-link btn-link-external dynamic-notch-link-btn">
                                 <a href="https://www.linkedin.com/in/mattiaippoliti/" target="_blank" rel="noopener noreferrer" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="LinkedIn">
                                     <span class="btn-text">
+                                        <span class="dynamic-notch-icon dynamic-notch-icon-linkedin" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" focusable="false">
+                                                <path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19ZM8.31 10.06H5.93V17.5H8.31V10.06ZM16.64 9.89C15.34 9.89 14.53 10.6 14.18 11.1V10.06H11.89V17.5H14.26V13.52C14.26 12.48 14.45 11.49 15.74 11.49C17 11.49 17.02 12.67 17.02 13.58V17.5H19.39V13.11C19.39 10.95 18.92 9.89 16.64 9.89ZM7.12 6.5A1.38 1.38 0 1 0 7.12 9.26A1.38 1.38 0 0 0 7.12 6.5Z"></path>
+                                            </svg>
+                                        </span>
                                         <span class="btn-text-inner">LinkedIn</span>
                                     </span>
                                 </a>
@@ -1235,6 +1250,11 @@ function initDynamicNotch() {
                             <div class="btn btn-link btn-link-external dynamic-notch-link-btn">
                                 <a href="https://github.com/MattiaIppoliti" target="_blank" rel="noopener noreferrer" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="GitHub">
                                     <span class="btn-text">
+                                        <span class="dynamic-notch-icon dynamic-notch-icon-github" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" focusable="false">
+                                                <path d="M12 2A10 10 0 0 0 8.84 21.49C9.34 21.58 9.52 21.27 9.52 21V19.17C6.73 19.78 6.14 17.98 6.14 17.98C5.68 16.8 5.03 16.49 5.03 16.49C4.12 15.87 5.1 15.89 5.1 15.89C6.11 15.96 6.65 16.93 6.65 16.93C7.55 18.47 9.01 18.03 9.6 17.78C9.69 17.13 9.95 16.69 10.24 16.44C8.01 16.19 5.67 15.32 5.67 11.43C5.67 10.32 6.07 9.42 6.72 8.72C6.61 8.47 6.27 7.45 6.82 6.06C6.82 6.06 7.66 5.79 9.5 7.03C10.3 6.81 11.15 6.7 12 6.7C12.85 6.7 13.7 6.81 14.5 7.03C16.34 5.79 17.18 6.06 17.18 6.06C17.73 7.45 17.39 8.47 17.28 8.72C17.93 9.42 18.33 10.32 18.33 11.43C18.33 15.33 15.98 16.19 13.75 16.44C14.11 16.75 14.43 17.37 14.43 18.31V21C14.43 21.27 14.61 21.59 15.12 21.49A10 10 0 0 0 12 2Z"></path>
+                                            </svg>
+                                        </span>
                                         <span class="btn-text-inner">GitHub</span>
                                     </span>
                                 </a>
@@ -1279,20 +1299,31 @@ function initDynamicNotch() {
         const desktopOpenWidth = 466.82;
         const desktopClosedHeight = 60;
         const desktopOpenHeight = 124;
+        const mobileClosedWidth = 215;
+        const mobileClosedHeight = 33;
+        const mobileOpenWidth = 382;
+        const mobileOpenHeight = 120;
+        const mobileMaxWidth = Math.max(240, window.innerWidth - 16);
+
+        const resolvedMobileClosedWidth = Math.min(mobileClosedWidth, mobileMaxWidth);
+        const resolvedMobileOpenWidth = Math.min(mobileOpenWidth, mobileMaxWidth);
+        const mobileClosedScale = resolvedMobileClosedWidth / mobileClosedWidth;
+        const mobileOpenScale = resolvedMobileOpenWidth / mobileOpenWidth;
 
         return {
             closedWidth: isSmallScreen
-                ? Math.max(238, Math.min(window.innerWidth - 20, desktopClosedWidth))
+                ? resolvedMobileClosedWidth
                 : Math.min(desktopClosedWidth, window.innerWidth - 24),
             openWidth: isSmallScreen
-                ? Math.max(268, Math.min(window.innerWidth - 12, desktopOpenWidth))
+                ? resolvedMobileOpenWidth
                 : Math.min(desktopOpenWidth, window.innerWidth - 24),
-            closedHeight: isSmallScreen ? 58 : desktopClosedHeight,
-            openHeight: isSmallScreen ? 108 : desktopOpenHeight
+            closedHeight: isSmallScreen ? Math.round(mobileClosedHeight * mobileClosedScale) : desktopClosedHeight,
+            openHeight: isSmallScreen ? Math.round(mobileOpenHeight * mobileOpenScale) : desktopOpenHeight
         };
     };
 
     const isTouchPointer = () => window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    const isMobileNotchView = () => window.innerWidth <= 540;
 
     const setLinksFocusable = (isExpanded) => {
         shell.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
@@ -1317,13 +1348,19 @@ function initDynamicNotch() {
     };
 
     const animateNotchState = (shouldExpand) => {
-        if (isExpanded === shouldExpand && !dynamicNotchTimeline?.isActive()) {
+        const targetExpandedState = isMobileNotchView() ? false : shouldExpand;
+
+        if (targetExpandedState === false) {
+            notch.classList.remove('is-touch-expanded');
+        }
+
+        if (isExpanded === targetExpandedState && !dynamicNotchTimeline?.isActive()) {
             return;
         }
 
-        isExpanded = shouldExpand;
-        notch.classList.toggle('is-expanded', shouldExpand);
-        setLinksFocusable(shouldExpand);
+        isExpanded = targetExpandedState;
+        notch.classList.toggle('is-expanded', targetExpandedState);
+        setLinksFocusable(targetExpandedState);
 
         if (dynamicNotchTimeline) {
             dynamicNotchTimeline.kill();
@@ -1332,7 +1369,7 @@ function initDynamicNotch() {
         const sizes = getNotchSizes();
         syncNotchRowSizing(sizes);
 
-        if (shouldExpand) {
+        if (targetExpandedState) {
             dynamicNotchTimeline = gsap.timeline();
             dynamicNotchTimeline
                 .to(shell, {
@@ -1367,6 +1404,24 @@ function initDynamicNotch() {
 
     const resizeNotch = () => {
         const sizes = getNotchSizes();
+
+        if (isMobileNotchView()) {
+            if (dynamicNotchTimeline) {
+                dynamicNotchTimeline.kill();
+                dynamicNotchTimeline = null;
+            }
+            isExpanded = false;
+            notch.classList.remove('is-expanded', 'is-touch-expanded');
+            setLinksFocusable(false);
+            gsap.set(expanded, {
+                autoAlpha: 0,
+                y: 12
+            });
+            shell.tabIndex = -1;
+        } else {
+            shell.tabIndex = 0;
+        }
+
         syncNotchRowSizing(sizes);
         gsap.set(shell, {
             width: isExpanded ? sizes.openWidth : sizes.closedWidth,
@@ -1388,7 +1443,7 @@ function initDynamicNotch() {
     };
 
     const handleMouseEnter = () => {
-        if (!isTouchPointer()) {
+        if (!isTouchPointer() && !isMobileNotchView()) {
             setSecondCursorHiddenForNotch(true);
             animateNotchState(true);
         }
@@ -1402,6 +1457,9 @@ function initDynamicNotch() {
     };
 
     const handleFocusIn = () => {
+        if (isMobileNotchView()) {
+            return;
+        }
         animateNotchState(true);
     };
 
@@ -1416,6 +1474,14 @@ function initDynamicNotch() {
     };
 
     const handleTouchToggle = (event) => {
+        if (isMobileNotchView()) {
+            if (!event.target.closest('a')) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            return;
+        }
+
         if (!isTouchPointer()) {
             return;
         }
@@ -1445,6 +1511,16 @@ function initDynamicNotch() {
     };
 
     const handleKeyboardToggle = (event) => {
+        if (isMobileNotchView()) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+            }
+            if (event.key === 'Escape') {
+                animateNotchState(false);
+            }
+            return;
+        }
+
         if ((event.key === 'Enter' || event.key === ' ') && event.target !== shell) {
             return;
         }
