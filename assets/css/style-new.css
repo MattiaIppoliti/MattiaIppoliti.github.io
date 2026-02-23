@@ -403,17 +403,17 @@ main.touch .main-wrap {
     position: absolute;
     inset: 0;
     padding: 2.8px;
-    background-image: radial-gradient(38% 132% at 50% 118%, rgba(255, 255, 255, 0.615) 0%, rgba(255, 255, 255, .14) 42%, rgba(255, 255, 255, .05) 62%, rgba(255, 255, 255, 0) 80%);
+    background-image: radial-gradient(96% 146% at 50% 118%, rgba(255, 255, 255, .24) 0%, rgba(255, 255, 255, .12) 40%, rgba(255, 255, 255, .05) 62%, rgba(255, 255, 255, 0) 80%);
     background-repeat: no-repeat;
-    background-size: 120% 150%;
+    background-size: 170% 180%;
     background-position: 50% 100%;
-    filter: blur(5.6px);
-    opacity: .16;
+    filter: blur(6px);
+    opacity: .18;
     pointer-events: none;
     z-index: 3;
     mix-blend-mode: screen;
-    -webkit-clip-path: inset(34% 0 0 0);
-    clip-path: inset(34% 0 0 0);
+    -webkit-clip-path: inset(38% 0 0 0);
+    clip-path: inset(38% 0 0 0);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -486,26 +486,26 @@ main.touch .main-wrap {
 
 @keyframes dynamicNotchSonarSweep {
     0% {
-        background-position: -18% 52%;
-        opacity: .4;
+        background-position: -30% 100%;
+        opacity: .12;
     }
-    18% {
-        opacity: .68;
+    20% {
+        opacity: .22;
     }
-    52% {
-        opacity: .6;
+    55% {
+        opacity: .20;
     }
     100% {
-        background-position: 118% 52%;
-        opacity: .46;
+        background-position: 130% 100%;
+        opacity: .14;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .dynamic-notch-surface::after {
         animation: none;
-        background-position: 50% 52%;
-        opacity: .44;
+        background-position: 50% 100%;
+        opacity: .16;
     }
     .dynamic-notch-trace-sweep-halo {
         animation: none;
@@ -883,11 +883,11 @@ main.touch .main-wrap {
     }
     .dynamic-notch-surface::after {
         padding: 1.6px;
-        background-size: 128% 158%;
+        background-size: 180% 188%;
         background-position: 50% 100%;
         filter: blur(7px);
-        -webkit-clip-path: inset(40% 0 0 0);
-        clip-path: inset(40% 0 0 0);
+        -webkit-clip-path: inset(44% 0 0 0);
+        clip-path: inset(44% 0 0 0);
     }
     .dynamic-notch-border {
         top: 24px;
@@ -1618,29 +1618,43 @@ main.touch .main-wrap {
     top: 50%;
     transform: translateY(-50%);
     display: inline-block;
-}
-
-.hanger span {
-    color: var(--color-dark);
+    isolation: isolate;
 }
 
 .home-header .hanger svg {
     width: auto;
     height: 6em;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .28)) drop-shadow(0 3px 8px rgba(0, 0, 0, .28));
+    backdrop-filter: blur(18px) saturate(102%);
+    -webkit-backdrop-filter: blur(18px) saturate(102%);
+}
+
+.home-header .hanger svg path {
+    fill: rgba(18, 19, 23, .52) !important;
+    stroke: rgba(242, 242, 242, .14);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+    paint-order: stroke fill;
 }
 
 .home-header .hanger p {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 4;
     margin: 0;
     padding-right: 5em;
     padding-left: var(--gap-padding);
     line-height: 1.2;
+    color: rgba(255, 255, 255, .96);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .35);
 }
 
 .home-header .hanger p span {
     display: block;
+    color: inherit;
 }
 
 .home-header .white-block {
