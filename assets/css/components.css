@@ -42,6 +42,17 @@
     height: clamp(4.5em, 6.5vw, 8em);
 }
 
+.profile-picture-bw {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background-size: cover;
+    width: clamp(4.5em, 6.5vw, 8em);
+    height: clamp(4.5em, 6.5vw, 8em);
+}
+
+
 /* ------------------------- Pattern Dots -------------------------------------------------- */
 
 .dots {
