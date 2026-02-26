@@ -1360,11 +1360,47 @@ main.touch .main-wrap {
     will-change: transform;
 }
 
-.footer .profile-picture {
+/* use notion avatar inside footers and make it noticeably larger */
+.footer .profile-picture,
+.footer .profile-picture-bw {
     margin-right: .125em;
-    height: .85em;
-    width: .85em;
+    height: 3em;
+    width: 3em;
     transform: translateY(.09em);
+    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background-size: cover;
+}
+
+/* single large avatar that spans both words */
+.footer-cover {
+    margin-right: .5em;
+    height: 4.5em;
+    width: 4.5em;
+    background: url("../img/profile_circular_notion.png") center center no-repeat;
+    background-size: cover;
+    display: inline-block;
+}
+
+/* align the avatar to the left of both spans by turning the heading into a flex container */
+.footer h2 {
+    display: flex;
+    align-items: center;
+    gap: .25em;
+}
+
+/* when using .footer-heading structure, stack text vertically */
+.footer-heading {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+.footer-heading .footer-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+.footer-heading .footer-text span {
+    display: block;
 }
 
 .footer .arrow svg {
@@ -1492,11 +1528,20 @@ main.touch .main-wrap {
         right: 0;
         bottom: 1em;
     }
-    .footer .profile-picture {
+    /* keep the enlarged size on small screens as well */
+    .footer .profile-picture,
+    .footer .profile-picture-bw {
         margin-right: .125em;
-        height: .95em;
-        width: .95em;
+        height: 2.4em;
+        width: 2.4em;
         transform: translateY(.1em);
+        background: url("../img/profile_circular_notion.png") center center no-repeat;
+        background-size: cover;
+    }
+    .footer-cover {
+        height: 5.0em;
+        width: 5.0em;
+        margin-right: .5em;
     }
 }
 
