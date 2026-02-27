@@ -1225,7 +1225,7 @@ function initDynamicNotch() {
                         </div>
                         <span class="dynamic-notch-time">--:--</span>
                         <div class="btn btn-link btn-link-external dynamic-notch-mobile-available">
-                            <a href="/contacts/" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="Go to contact page">
+                            <a href="/contact/" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="Go to contact page">
                                 <span class="btn-text">
                                     <span class="dynamic-notch-sonar" aria-hidden="true"></span>
                                     <span class="btn-text-inner">Contact!</span>
@@ -1261,7 +1261,7 @@ function initDynamicNotch() {
                             </div>
                         </div>
                         <div class="btn btn-link btn-link-external dynamic-notch-available">
-                            <a href="/contacts/" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="Go to contact page">
+                            <a href="/contact/" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="Go to contact page">
                                 <span class="btn-text">
                                     <span class="dynamic-notch-sonar" aria-hidden="true"></span>
                                     <span class="btn-text-inner">Available</span>
