@@ -3436,8 +3436,8 @@ main.touch .main-wrap {
 
 .contact-header .row:nth-child(1) .flex-col:nth-child(2) .profile-picture-bw {
     display: inline-flex;
-    width: clamp(10em, 20vw, 18em);
-    height: clamp(10em, 20vw, 18em);
+    width: clamp(10em, 18vw, 18em);
+    height: clamp(10em, 18vw, 18em);
 }
 
 .contact-header .row:nth-child(1) .flex-col:nth-child(2) .arrow {
