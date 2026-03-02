@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<script>
+    (function() {
+        if (!window.__mattiaSetVh) {
+            window.__mattiaSetVh = function() {
+                document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+            };
+        }
+        window.__mattiaSetVh();
+    })();
+</script>
 
 <title>Contact Mattia Ippoliti | mattia app</title>
 <meta name="description"
@@ -20,6 +30,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:image" content="https://mattia.app/assets/img/profile.png">
 <link rel="canonical" href="https://mattia.app/contact/">
+<link rel="preload" href="../assets/fonts/UncutSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/UncutSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/Gulax-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
 <link href="../assets/css/normalize.css" rel="stylesheet">
 <link href="../assets/css/locomotive-scroll.css" rel="stylesheet">

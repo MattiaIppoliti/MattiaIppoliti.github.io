@@ -536,15 +536,20 @@ function initScript() {
  */
 function initWindowInnerheight() {
 
-    // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
-    $(document).ready(function() {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-        $('.btn-hamburger').click(function() {
-            let vh = window.innerHeight * 0.01;
+    if (!window.__mattiaSetVh) {
+        window.__mattiaSetVh = function() {
+            const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
-        });
-    });
+        };
+    }
+
+    if (!window.__mattiaVhListenersBound) {
+        window.addEventListener('resize', window.__mattiaSetVh);
+        window.addEventListener('orientationchange', window.__mattiaSetVh);
+        window.__mattiaVhListenersBound = true;
+    }
+
+    window.__mattiaSetVh();
 
 }
 
@@ -1040,14 +1045,42 @@ function initVisualFilter() {
 function initCookieViews() {
     // Set cookie for columns/rows view
     // https://www.youtube.com/watch?v=rfwiyBoVwdQ&ab_channel=TimothyRicks
-    if (Cookies.get("view") == "columns") {
-        $('.grid-row .rows-btn').removeClass('active');
-        $('.grid-row .columns-btn').addClass('active');
-        $('#work .grid-rows-part').removeClass('visible');
-        $('#work .grid-columns-part').addClass('visible');
-        scroll.update();
+    const htmlNode = document.documentElement;
+    const prepaintColumnsClass = 'prefers-work-columns';
+    const wantsColumnsView = Cookies.get("view") == "columns";
+
+    if (!wantsColumnsView) {
+        htmlNode.classList.remove(prepaintColumnsClass);
+        return;
+    }
+
+    const rowsPart = document.querySelector('#work .grid-rows-part');
+    const columnsPart = document.querySelector('#work .grid-columns-part');
+
+    if (!rowsPart || !columnsPart) {
+        htmlNode.classList.remove(prepaintColumnsClass);
+        return;
+    }
+
+    const isColumnsVisible = Boolean(rowsPart && columnsPart && !rowsPart.classList.contains('visible') && columnsPart.classList.contains('visible'));
+
+    $('.grid-row .rows-btn').removeClass('active');
+    $('.grid-row .columns-btn').addClass('active');
+
+    if (!isColumnsVisible) {
+        if (rowsPart) {
+            rowsPart.classList.remove('visible');
+        }
+        if (columnsPart) {
+            columnsPart.classList.add('visible');
+        }
+        if (scroll && typeof scroll.update === 'function') {
+            scroll.update();
+        }
         ScrollTrigger.refresh();
     }
+
+    htmlNode.classList.remove(prepaintColumnsClass);
 }
 
 
@@ -1193,6 +1226,35 @@ function initDynamicNotch() {
         oldNotch.remove();
     }
 
+    const getNotchSizes = () => {
+        const isSmallScreen = window.innerWidth <= 540;
+        const desktopClosedWidth = 397.44;
+        const desktopOpenWidth = 466.82;
+        const desktopClosedHeight = 60;
+        const desktopOpenHeight = 124;
+        const mobileClosedWidth = 215;
+        const mobileClosedHeight = 33;
+        const mobileOpenWidth = 382;
+        const mobileOpenHeight = 120;
+        const mobileMaxWidth = Math.max(240, window.innerWidth - 16);
+
+        const resolvedMobileClosedWidth = Math.min(mobileClosedWidth, mobileMaxWidth);
+        const resolvedMobileOpenWidth = Math.min(mobileOpenWidth, mobileMaxWidth);
+        const mobileClosedScale = resolvedMobileClosedWidth / mobileClosedWidth;
+        const mobileOpenScale = resolvedMobileOpenWidth / mobileOpenWidth;
+
+        return {
+            closedWidth: isSmallScreen
+                ? resolvedMobileClosedWidth
+                : Math.min(desktopClosedWidth, window.innerWidth - 24),
+            openWidth: isSmallScreen
+                ? resolvedMobileOpenWidth
+                : Math.min(desktopOpenWidth, window.innerWidth - 24),
+            closedHeight: isSmallScreen ? Math.round(mobileClosedHeight * mobileClosedScale) : desktopClosedHeight,
+            openHeight: isSmallScreen ? Math.round(mobileOpenHeight * mobileOpenScale) : desktopOpenHeight
+        };
+    };
+
     const notch = document.createElement('div');
     notch.className = 'dynamic-notch';
     notch.innerHTML = `
@@ -1217,7 +1279,7 @@ function initDynamicNotch() {
                     </svg>
                     <div class="dynamic-notch-compact">
                         <a href="/about/" class="dynamic-notch-avatar-link" aria-label="Go to about page">
-                            <img class="dynamic-notch-avatar" src="/assets/img/profile_circular.png" alt="Mattia Ippoliti profile picture" />
+                            <img class="dynamic-notch-avatar" src="/assets/img/profile_circular.png" alt="Mattia Ippoliti profile picture" width="34" height="34" />
                         </a>
                         <div class="dynamic-notch-text">
                             <span class="dynamic-notch-name">Mattia Ippoliti</span>
@@ -1274,8 +1336,6 @@ function initDynamicNotch() {
         </div>
     `;
 
-    body.appendChild(notch);
-
     const shell = notch.querySelector('.dynamic-notch-shell');
     const expanded = notch.querySelector('.dynamic-notch-expanded');
     const timeNode = notch.querySelector('.dynamic-notch-time');
@@ -1286,41 +1346,19 @@ function initDynamicNotch() {
         return;
     }
 
+    const initialSizes = getNotchSizes();
+    shell.style.setProperty('--dynamic-notch-compact-height', `${initialSizes.closedHeight}px`);
+    shell.style.setProperty('--dynamic-notch-expanded-row-height', `${initialSizes.openHeight - initialSizes.closedHeight}px`);
+    shell.style.width = `${initialSizes.closedWidth}px`;
+    shell.style.height = `${initialSizes.closedHeight}px`;
+    body.appendChild(notch);
+
     const formatter = new Intl.DateTimeFormat([], {
         timeZone: 'Europe/Amsterdam',
         hour: '2-digit',
         minute: '2-digit',
         hour12: true
     });
-
-    const getNotchSizes = () => {
-        const isSmallScreen = window.innerWidth <= 540;
-        const desktopClosedWidth = 397.44;
-        const desktopOpenWidth = 466.82;
-        const desktopClosedHeight = 60;
-        const desktopOpenHeight = 124;
-        const mobileClosedWidth = 215;
-        const mobileClosedHeight = 33;
-        const mobileOpenWidth = 382;
-        const mobileOpenHeight = 120;
-        const mobileMaxWidth = Math.max(240, window.innerWidth - 16);
-
-        const resolvedMobileClosedWidth = Math.min(mobileClosedWidth, mobileMaxWidth);
-        const resolvedMobileOpenWidth = Math.min(mobileOpenWidth, mobileMaxWidth);
-        const mobileClosedScale = resolvedMobileClosedWidth / mobileClosedWidth;
-        const mobileOpenScale = resolvedMobileOpenWidth / mobileOpenWidth;
-
-        return {
-            closedWidth: isSmallScreen
-                ? resolvedMobileClosedWidth
-                : Math.min(desktopClosedWidth, window.innerWidth - 24),
-            openWidth: isSmallScreen
-                ? resolvedMobileOpenWidth
-                : Math.min(desktopOpenWidth, window.innerWidth - 24),
-            closedHeight: isSmallScreen ? Math.round(mobileClosedHeight * mobileClosedScale) : desktopClosedHeight,
-            openHeight: isSmallScreen ? Math.round(mobileOpenHeight * mobileOpenScale) : desktopOpenHeight
-        };
-    };
 
     const isTouchPointer = () => window.matchMedia('(hover: none), (pointer: coarse)').matches;
     const isMobileNotchView = () => window.innerWidth <= 540;

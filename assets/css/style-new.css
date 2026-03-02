@@ -642,6 +642,10 @@ main.touch .main-wrap {
     letter-spacing: -.02em;
     color: var(--color-white);
     white-space: nowrap;
+    display: inline-block;
+    min-width: 8ch;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
 }
 
 .dynamic-notch-expanded {
@@ -2450,6 +2454,16 @@ main.touch .main-wrap {
 }
 
 .grid-fade.visible {
+    height: auto;
+}
+
+html.prefers-work-columns #work .grid-rows-part {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+html.prefers-work-columns #work .grid-columns-part {
     height: auto;
 }
 
