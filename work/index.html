@@ -1,11 +1,16 @@
-<!DOCTYPE html><!--  This site was created by Mattia Ippoliti  -->
+﻿<!DOCTYPE html><!--  This site was created by Mattia Ippoliti  -->
 <html lang="en">
 
 <head>
    <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
    <script>
       (function() {
+         document.documentElement.classList.add('js');
+         var coarsePointerMatch = window.matchMedia ? window.matchMedia('(hover: none), (pointer: coarse)').matches : false;
+         var isTouchDevice = coarsePointerMatch || ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+         document.documentElement.classList.add(isTouchDevice ? 'touch-device' : 'no-touch-device');
+         document.documentElement.classList.remove(isTouchDevice ? 'no-touch-device' : 'touch-device');
          if (!window.__mattiaSetVh) {
             window.__mattiaSetVh = function() {
                document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
@@ -137,7 +142,7 @@
    <main class="main" id="work" data-barba="container" data-barba-namespace="work">
       <div class="mouse-pos-list-image no-select">
          <div class="mouse-pos-list-image-bounce overlay">
-            <div class="float-image-wrap">
+            <ul class="float-image-wrap" role="presentation">
                <li class="mouse-pos-list-image-inner first-work-category interaction visible">
                   <div class="overlay overlay-image lazy"
                       style="background-color: #DCD0C2; background-position: center center; background-repeat: no-repeat; background-size: cover;"
@@ -146,17 +151,17 @@
                <li class="mouse-pos-list-image-inner first-work-category interaction visible">
                   <div class="overlay overlay-image lazy"
                       style="background-color: #DCD0C2; background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                      data-bg="../assets/img/intesa.png"></div>
+                      data-bg="../assets/img/optimized/intesa-opt.jpg"></div>
               </li>
               <li class="mouse-pos-list-image-inner first-work-category interaction visible">
                   <div class="overlay overlay-image lazy"
                       style="background-color: #E2D1D9; background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                      data-bg="../assets/img/korea.jpg"></div>
+                      data-bg="../assets/img/optimized/korea-opt.jpg"></div>
               </li>
               <li class="mouse-pos-list-image-inner second-work-category interaction visible">
                <div class="overlay overlay-image lazy"
                    style="background-color: #373737; background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                   data-bg="../assets/img/MacOS_CV.png"></div>
+                   data-bg="../assets/img/optimized/macos-cv-opt.jpg"></div>
            </li>
               <li class="mouse-pos-list-image-inner second-work-category interaction visible">
                   <div class="overlay overlay-image lazy"
@@ -166,11 +171,11 @@
               <li class="mouse-pos-list-image-inner second-work-category interaction visible">
                <div class="overlay overlay-image lazy"
                    style="background-color: rgb(98, 109, 110); background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                   data-bg="../assets/img/manifold.png"></div>
+                   data-bg="../assets/img/optimized/manifold-opt.jpg"></div>
            </li>
+            </ul>
             </div>
          </div>
-      </div>
       <div class="mouse-pos-list-btn no-select"></div>
       <div class="mouse-pos-list-span no-select">
          <p>View</p>
@@ -193,7 +198,7 @@
          </div>
          <div class="fixed-nav-inner">
             <div class="row nav-row">
-               <h5>Navigation</h5>
+               <p class="section-label">Navigation</p>
                <div class="stripe"></div>
                <ul class="links-wrap">
                   <li class="btn btn-link">
@@ -235,7 +240,7 @@
             <div class="row social-row">
                <div class="stripe"></div>
                <div class="socials">
-                  <h5>Socials</h5>
+                  <p class="section-label">Socials</p>
                   <ul>
                      <li class="btn btn-link btn-link-external">
                          <a href="https://www.linkedin.com/in/mattiaippoliti/" target="_blank"
@@ -372,7 +377,7 @@
                   <div class="btn btn-normal btn-icon columns-btn">
                      <div class="btn-click magnetic" data-strength="25" data-strength-text="15">
                         <div class="btn-fill"></div>
-                        <span class="btn-text">
+                       <span class="btn-text">
                            <span class="btn-text-inner change"><svg style="width: 20px;" width="20" height="20"
                                  viewBox="0 0 20 20">
                                  <g fill="currentColor" fill-rule="nonzero">
@@ -392,16 +397,16 @@
             <div class="container">
                <div class="grid-sub-title">
                   <div class="flex-col">
-                     <h5>Project</h5>
+                     <p class="section-label">Project</p>
                   </div>
                   <div class="flex-col">
-                     <h5>Location</h5>
+                     <p class="section-label">Location</p>
                   </div>
                   <div class="flex-col">
-                     <h5>Services</h5>
+                     <p class="section-label">Services</p>
                   </div>
                   <div class="flex-col">
-                     <h5>Year</h5>
+                     <p class="section-label">Year</p>
                   </div>
                </div>
                <!--data= Data Engineering / development = Development-->
@@ -508,7 +513,7 @@
                         </div>
                      </a>
                   </li>
-                  <div class="stripe last animate"></div>
+                  <li class="stripe last animate" aria-hidden="true" role="presentation"></li>
                </ul>
             </div>
          </section>
@@ -547,7 +552,7 @@
                                  <div class="overlay overlay-color" style="background-color: #DCD0C2;"></div>
                                  <div class="overlay overlay-image lazy"
                                     style="background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                                    data-bg="../assets/img/intesa.png">
+                                    data-bg="../assets/img/optimized/intesa-opt.jpg">
                                  </div>
                               </div>
                            </div>
@@ -571,7 +576,7 @@
                                  <div class="tile-image">
                                      <div class="overlay overlay-image lazy"
                                          style="background-color: #E2D1D9; background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                                         data-bg="../assets/img/korea.jpg">
+                                         data-bg="../assets/img/optimized/korea-opt.jpg">
                                      </div>
                                  </div>
                              </div>
@@ -596,7 +601,7 @@
                                  <div class="overlay overlay-color" style="background-color: #B1A994;"></div>
                                  <div class="overlay overlay-image lazy"
                                     style="background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                                    data-bg="../assets/img/MacOS_CV.png">
+                                    data-bg="../assets/img/optimized/macos-cv-opt.jpg">
                                  </div>
                               </div>
                            </div>
@@ -646,7 +651,7 @@
                                  <div class="overlay overlay-color" style="background-color: #373737;"></div>
                                  <div class="overlay overlay-image lazy"
                                     style="background-position: center center; background-repeat: no-repeat; background-size: cover;"
-                                    data-bg="../assets/img/manifold.png">
+                                    data-bg="../assets/img/optimized/manifold-opt.jpg">
                                  </div>
                               </div>
                            </div>
@@ -762,17 +767,23 @@
                <div class="row bottom-footer">
                   <div class="flex-col">
                      <div class="credits">
-                        <h5>Version</h5>
-                        <p>2025 © Edition</p>
+                        <p class="section-label">Version</p>
+                        <p>2026 © Edition</p>
                      </div>
                      <div class="time">
-                        <h5>Local time</h5>
+                        <p class="section-label">Local time</p>
                         <p><span id="timeSpan">09:41 PM CET</span></p>
                      </div>
                   </div>
                   <div class="flex-col">
+                     <div class="goodbye">
+                        <p class="section-label">Greetings</p>
+                        <p>made in Italy (Abruzzo 🍢) with ❤️</p>
+                     </div>
+                  </div>
+                  <div class="flex-col">
                      <div class="socials">
-                        <h5>Socials</h5>
+                        <p class="section-label">Socials</p>
                         <ul>
                            <li class="btn btn-link btn-link-external">
                               <a href="https://github.com/MattiaIppoliti" target="_blank" class="btn-click magnetic"
@@ -809,14 +820,14 @@
       </div>
       </div>
    </main>
-   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-   <script src="https://unpkg.com/@barba/core"></script>
-   <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
+   <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.0/js.cookie.min.js"></script>
+   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+   <script defer src="https://unpkg.com/@barba/core"></script>
+   <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.6.1/dist/lazyload.min.js"></script>
 
-   <script src="../assets/js/locomotive-scroll.min.js"></script>
+   <script defer src="../assets/js/locomotive-scroll.min.js"></script>
    <script defer src="../assets/js/index-new.js"></script>
 
    <!-- Vercel Speed Insights -->
@@ -827,3 +838,12 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+

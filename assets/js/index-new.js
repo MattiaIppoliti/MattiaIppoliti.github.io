@@ -8,7 +8,9 @@ const selectAll = (e) => document.querySelectorAll(e);
 //const container = select('.site-main');
 let dynamicNotchCleanup = null;
 let dynamicNotchTimeline = null;
+let stickyCursorTicker = null;
 
+initCLSDebugObserver();
 initPageTransitions();
 
 // Animation - First Page Load
@@ -20,15 +22,9 @@ function initLoaderHome() {
         top: "0",
     });
 
-    if ($(window).width() > 540) {
-        tl.set("main .once-in", {
-            y: "50vh"
-        });
-    } else {
-        tl.set("main .once-in", {
-            y: "10vh"
-        });
-    }
+    tl.set("main .once-in", {
+        autoAlpha: 0
+    });
 
     tl.set(".loading-words", {
         opacity: 0,
@@ -127,7 +123,7 @@ function initLoaderHome() {
 
     tl.to("main .once-in", {
         duration: 1.5,
-        y: "0vh",
+        autoAlpha: 1,
         stagger: .07,
         ease: "Expo.easeOut",
         clearProps: true
@@ -152,15 +148,9 @@ function initLoader() {
         top: "0",
     });
 
-    if ($(window).width() > 540) {
-        tl.set("main .once-in", {
-            y: "50vh"
-        });
-    } else {
-        tl.set("main .once-in", {
-            y: "10vh"
-        });
-    }
+    tl.set("main .once-in", {
+        autoAlpha: 0
+    });
 
     tl.set(".loading-words", {
         opacity: 1,
@@ -210,7 +200,7 @@ function initLoader() {
 
     tl.to("main .once-in", {
         duration: 1,
-        y: "0vh",
+        autoAlpha: 1,
         stagger: .05,
         ease: "Expo.easeOut",
         clearProps: "true"
@@ -333,15 +323,9 @@ function pageTransitionIn() {
 function pageTransitionOut() {
     var tl = gsap.timeline();
 
-    if ($(window).width() > 540) {
-        tl.set("main .once-in", {
-            y: "50vh",
-        });
-    } else {
-        tl.set("main .once-in", {
-            y: "20vh"
-        });
-    }
+    tl.set("main .once-in", {
+        autoAlpha: 0
+    });
 
     tl.call(function() {
         scroll.start();
@@ -349,7 +333,7 @@ function pageTransitionOut() {
 
     tl.to("main .once-in", {
         duration: 1,
-        y: "0vh",
+        autoAlpha: 1,
         stagger: .05,
         ease: "Expo.easeOut",
         delay: .8,
@@ -449,7 +433,17 @@ function initPageTransitions() {
             smooth: true,
         });
 
-        window.onresize = scroll.update();
+        if (window.__mattiaLocoResizeHandler) {
+            window.removeEventListener('resize', window.__mattiaLocoResizeHandler);
+        }
+        window.__mattiaLocoResizeHandler = () => {
+            if (scroll && typeof scroll.update === 'function') {
+                scroll.update();
+            }
+        };
+        window.addEventListener('resize', window.__mattiaLocoResizeHandler, {
+            passive: true
+        });
 
         scroll.on("scroll", () => ScrollTrigger.update());
 
@@ -484,7 +478,15 @@ function initPageTransitions() {
         }
 
         // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
-        ScrollTrigger.addEventListener('refresh', () => scroll.update());
+        if (window.__mattiaScrollTriggerRefreshHandler) {
+            ScrollTrigger.removeEventListener('refresh', window.__mattiaScrollTriggerRefreshHandler);
+        }
+        window.__mattiaScrollTriggerRefreshHandler = () => {
+            if (scroll && typeof scroll.update === 'function') {
+                scroll.update();
+            }
+        };
+        ScrollTrigger.addEventListener('refresh', window.__mattiaScrollTriggerRefreshHandler);
 
         // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
         ScrollTrigger.refresh();
@@ -558,27 +560,134 @@ function initWindowInnerheight() {
  */
 function initCheckTouchDevice() {
 
-    function isTouchScreendevice() {
-        return 'ontouchstart' in window || navigator.maxTouchPoints;
+    if (!window.__mattiaDetectTouchMode) {
+        window.__mattiaDetectTouchMode = function() {
+            const coarsePointerMatch = window.matchMedia
+                ? window.matchMedia('(hover: none), (pointer: coarse)').matches
+                : false;
+            return Boolean(coarsePointerMatch || ('ontouchstart' in window) || navigator.maxTouchPoints);
+        };
+    }
+
+    if (!window.__mattiaApplyTouchModeClasses) {
+        window.__mattiaApplyTouchModeClasses = function(isTouchDevice) {
+            const rootNode = document.documentElement;
+            const touchClassName = 'touch-device';
+            const noTouchClassName = 'no-touch-device';
+            const targetClass = isTouchDevice ? touchClassName : noTouchClassName;
+            const oppositeClass = isTouchDevice ? noTouchClassName : touchClassName;
+
+            if (!rootNode.classList.contains(targetClass)) {
+                rootNode.classList.add(targetClass);
+            }
+            rootNode.classList.remove(oppositeClass);
+        };
+    }
+
+    if (!window.__mattiaTouchModeListenersBound) {
+        const syncTouchMode = () => {
+            window.__mattiaApplyTouchModeClasses(window.__mattiaDetectTouchMode());
+        };
+        window.addEventListener('resize', syncTouchMode);
+        window.addEventListener('orientationchange', syncTouchMode);
+        window.__mattiaTouchModeListenersBound = true;
+    }
+
+    window.__mattiaApplyTouchModeClasses(window.__mattiaDetectTouchMode());
+
+}
+
+function initCLSDebugObserver() {
+    if (window.__clsDebugInitialized) {
+        return;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('clsdebug') !== '1') {
+        return;
+    }
+
+    window.__clsDebugInitialized = true;
+
+    const getCurrentNamespace = () => {
+        const namespaceNode = document.querySelector('main[data-barba-namespace]');
+        return namespaceNode ? namespaceNode.getAttribute('data-barba-namespace') || 'unknown' : 'unknown';
     };
 
-    if (isTouchScreendevice()) {
-        $('main').addClass('touch');
-        $('main').removeClass('no-touch');
-    } else {
-        $('main').removeClass('touch');
-        $('main').addClass('no-touch');
-    }
-    $(window).resize(function() {
-        if (isTouchScreendevice()) {
-            $('main').addClass('touch');
-            $('main').removeClass('no-touch');
-        } else {
-            $('main').removeClass('touch');
-            $('main').addClass('no-touch');
+    const debugStore = {
+        value: 0,
+        entries: [],
+        topEntries(limit = 10) {
+            return this.entries
+                .slice()
+                .sort((a, b) => b.value - a.value)
+                .slice(0, limit);
         }
-    });
+    };
 
+    window.__clsDebug = debugStore;
+
+    if (!('PerformanceObserver' in window)) {
+        debugStore.unsupported = true;
+        return;
+    }
+
+    try {
+        const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+                if (entry.hadRecentInput) {
+                    return;
+                }
+
+                const sources = Array.isArray(entry.sources)
+                    ? entry.sources.slice(0, 3).map((source) => {
+                        const sourceNode = source && source.node;
+                        let selector = '';
+
+                        if (sourceNode && sourceNode.nodeType === 1) {
+                            const idPart = sourceNode.id ? `#${sourceNode.id}` : '';
+                            const classPart = typeof sourceNode.className === 'string'
+                                ? sourceNode.className
+                                    .trim()
+                                    .split(/\s+/)
+                                    .filter(Boolean)
+                                    .slice(0, 3)
+                                    .map((name) => `.${name}`)
+                                    .join('')
+                                : '';
+                            selector = `${sourceNode.nodeName.toLowerCase()}${idPart}${classPart}`;
+                        }
+
+                        return {
+                            value: source && typeof source.value === 'number' ? source.value : 0,
+                            selector
+                        };
+                    })
+                    : [];
+
+                debugStore.value += entry.value;
+                debugStore.entries.push({
+                    value: entry.value,
+                    startTime: entry.startTime,
+                    namespace: getCurrentNamespace(),
+                    sources
+                });
+
+                if (debugStore.entries.length > 200) {
+                    debugStore.entries.shift();
+                }
+            });
+        });
+
+        observer.observe({
+            type: 'layout-shift',
+            buffered: true
+        });
+
+        debugStore.disconnect = () => observer.disconnect();
+    } catch (error) {
+        debugStore.error = error && error.message ? error.message : 'Failed to initialize CLS debug observer';
+    }
 }
 
 /**
@@ -587,40 +696,48 @@ function initCheckTouchDevice() {
 function initHamburgerNav() {
 
     // Open/close navigation when clicked .btn-hamburger
+    $(document)
+        .off('mouseenter.mattiaNav mouseleave.mattiaNav', '.btn-hamburger, .btn-menu')
+        .on('mouseenter.mattiaNav', '.btn-hamburger, .btn-menu', function() {
+            $(".second-circle").addClass('hide-circles');
+        })
+        .on('mouseleave.mattiaNav', '.btn-hamburger, .btn-menu', function() {
+            $(".second-circle").removeClass('hide-circles');
+        });
 
-    $(document).ready(function() {
-
-        $(".btn-hamburger, .btn-menu").hover(
-            function () {
-                $(".second-circle").addClass('hide-circles');
-            },
-            function () {
-                $(".second-circle").removeClass('hide-circles');
-            }
-        );
-
-        $(".btn-hamburger, .btn-menu").click(function() {
+    $(document)
+        .off('click.mattiaNav', '.btn-hamburger, .btn-menu')
+        .on('click.mattiaNav', '.btn-hamburger, .btn-menu', function() {
             if ($(".btn-hamburger, .btn-menu").hasClass('active')) {
                 $(".btn-hamburger, .btn-menu").removeClass('active');
                 $("main").removeClass('nav-active');
-                scroll.start();
+                if (scroll && typeof scroll.start === 'function') {
+                    scroll.start();
+                }
             } else {
                 $(".btn-hamburger, .btn-menu").addClass('active');
                 $("main").addClass('nav-active');
-                scroll.stop();
+                if (scroll && typeof scroll.stop === 'function') {
+                    scroll.stop();
+                }
             }
         });
-        $('.fixed-nav-back').click(function() {
+
+    $(document)
+        .off('click.mattiaNav', '.fixed-nav-back')
+        .on('click.mattiaNav', '.fixed-nav-back', function() {
             $(".btn-hamburger, .btn-menu").removeClass('active');
             $("main").removeClass('nav-active');
-            scroll.start();
+            if (scroll && typeof scroll.start === 'function') {
+                scroll.start();
+            }
         });
-    });
-    $(document).keydown(function(e) {
-        if (e.keyCode == 27) {
-            if ($('main').hasClass('nav-active')) {
-                $(".btn-hamburger, .btn-menu").removeClass('active');
-                $("main").removeClass('nav-active');
+
+    $(document).off('keydown.mattiaNav').on('keydown.mattiaNav', function(e) {
+        if (e.keyCode == 27 && $('main').hasClass('nav-active')) {
+            $(".btn-hamburger, .btn-menu").removeClass('active');
+            $("main").removeClass('nav-active');
+            if (scroll && typeof scroll.start === 'function') {
                 scroll.start();
             }
         }
@@ -636,14 +753,67 @@ function initMagneticButtons() {
     // Magnetic Buttons
     // Found via: https://codepen.io/tdesero/pen/RmoxQg
     var magnets = document.querySelectorAll('.magnetic');
-    var strength = 100;
+    var magnetMetrics = new WeakMap();
+
+    function cacheMetrics(magnetButton) {
+        if (!magnetButton) {
+            return;
+        }
+        var bounding = magnetButton.getBoundingClientRect();
+        magnetMetrics.set(magnetButton, {
+            left: bounding.left,
+            top: bounding.top,
+            width: magnetButton.offsetWidth || bounding.width || 1,
+            height: magnetButton.offsetHeight || bounding.height || 1
+        });
+    }
+
+    function moveMagnet(event) {
+        var magnetButton = event.currentTarget;
+        var metrics = magnetMetrics.get(magnetButton);
+        if (!metrics) {
+            cacheMetrics(magnetButton);
+            metrics = magnetMetrics.get(magnetButton);
+        }
+
+        if (!metrics) {
+            return;
+        }
+
+        var magnetsStrength = Number(magnetButton.getAttribute("data-strength") || 0);
+        var magnetsStrengthText = Number(magnetButton.getAttribute("data-strength-text") || 0);
+        var relX = ((event.clientX - metrics.left) / metrics.width) - 0.5;
+        var relY = ((event.clientY - metrics.top) / metrics.height) - 0.5;
+
+        gsap.to(magnetButton, 1.5, {
+            x: relX * magnetsStrength,
+            y: relY * magnetsStrength,
+            rotate: "0.001deg",
+            ease: Power4.easeOut
+        });
+        gsap.to($(magnetButton).find(".btn-text"), 1.5, {
+            x: relX * magnetsStrengthText,
+            y: relY * magnetsStrengthText,
+            rotate: "0.001deg",
+            ease: Power4.easeOut
+        });
+    }
 
     // START : If screen is bigger as 540 px do magnetic
     if (window.innerWidth > 540) {
         // Mouse Reset
         magnets.forEach((magnet) => {
+            if (magnet.dataset.magneticBound === 'true') {
+                return;
+            }
+            magnet.dataset.magneticBound = 'true';
+            cacheMetrics(magnet);
+            magnet.addEventListener('mouseenter', function(event) {
+                cacheMetrics(event.currentTarget);
+            }, {
+                passive: true
+            });
             magnet.addEventListener('mousemove', moveMagnet);
-            $(this.parentNode).removeClass('not-active');
             magnet.addEventListener('mouseleave', function(event) {
                 gsap.to(event.currentTarget, 1.5, {
                     x: 0,
@@ -658,43 +828,18 @@ function initMagneticButtons() {
             });
         });
 
-        // Mouse move
-        function moveMagnet(event) {
-            var magnetButton = event.currentTarget;
-            var bounding = magnetButton.getBoundingClientRect();
-            var magnetsStrength = magnetButton.getAttribute("data-strength");
-            var magnetsStrengthText = magnetButton.getAttribute("data-strength-text");
-
-            gsap.to(magnetButton, 1.5, {
-                x: (((event.clientX - bounding.left) / magnetButton.offsetWidth) - 0.5) * magnetsStrength,
-                y: (((event.clientY - bounding.top) / magnetButton.offsetHeight) - 0.5) * magnetsStrength,
-                rotate: "0.001deg",
-                ease: Power4.easeOut
+        $(document)
+            .off('mouseenter.mattiaMagnetic mouseleave.mattiaMagnetic', '.magnetic, .work-items')
+            .on('mouseenter.mattiaMagnetic', '.magnetic, .work-items', function() {
+                $(".second-circle").addClass('hide-circles');
+            })
+            .on('mouseleave.mattiaMagnetic', '.magnetic, .work-items', function() {
+                $(".second-circle").removeClass('hide-circles');
             });
-            gsap.to($(this).find(".btn-text"), 1.5, {
-                x: (((event.clientX - bounding.left) / magnetButton.offsetWidth) - 0.5) * magnetsStrengthText,
-                y: (((event.clientY - bounding.top) / magnetButton.offsetHeight) - 0.5) * magnetsStrengthText,
-                rotate: "0.001deg",
-                ease: Power4.easeOut
-            });
-        }
-
-        $(document).ready(function() {
-
-            $(".magnetic, .work-items").hover(
-                function () {
-                    $(".second-circle").addClass('hide-circles');
-                },
-                function () {
-                    $(".second-circle").removeClass('hide-circles');
-                }
-            );
-        });
-
-    }; // END : If screen is bigger as 540 px do magnetic
+    } // END : If screen is bigger as 540 px do magnetic
 
     // Mouse Enter
-    $('.btn-click.magnetic').on('mouseenter', function() {
+    $(document).off('mouseenter.mattiaMagneticButtons', '.btn-click.magnetic').on('mouseenter.mattiaMagneticButtons', '.btn-click.magnetic', function() {
         if ($(this).find(".btn-fill").length) {
             gsap.to($(this).find(".btn-fill"), .6, {
                 startAt: {
@@ -717,7 +862,7 @@ function initMagneticButtons() {
     });
 
     // Mouse Leave
-    $('.btn-click.magnetic').on('mouseleave', function() {
+    $(document).off('mouseleave.mattiaMagneticButtons', '.btn-click.magnetic').on('mouseleave.mattiaMagneticButtons', '.btn-click.magnetic', function() {
         if ($(this).find(".btn-fill").length) {
             gsap.to($(this).find(".btn-fill"), .6, {
                 y: "-76%",
@@ -780,21 +925,26 @@ $("a").hover(hoverFunc, unhoverFunc);
 
 function initStickyCursorWithDelay() {
 
-    var cursorImage = $(".mouse-pos-list-image")
+    var cursorImage = $(".mouse-pos-list-image");
     var cursorBtn = $(".mouse-pos-list-btn");
     var cursorSpan = $(".mouse-pos-list-span");
 
-    var posXImage = 0
-    var posYImage = 0
-    var posXBtn = 0
-    var posYBtn = 0
-    var posXSpan = 0
-    var posYSpan = 0
-    var mouseX = 0
-    var mouseY = 0
+    var posXImage = 0;
+    var posYImage = 0;
+    var posXBtn = 0;
+    var posYBtn = 0;
+    var posXSpan = 0;
+    var posYSpan = 0;
+    var mouseX = 0;
+    var mouseY = 0;
+
+    if (stickyCursorTicker) {
+        stickyCursorTicker.kill();
+        stickyCursorTicker = null;
+    }
 
     if (document.querySelector(".mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span")) {
-        gsap.to({}, 0.0083333333, {
+        stickyCursorTicker = gsap.to({}, 0.0083333333, {
             repeat: -1,
             onRepeat: function() {
 
@@ -802,49 +952,49 @@ function initStickyCursorWithDelay() {
                     posXImage += (mouseX - posXImage) / 12;
                     posYImage += (mouseY - posYImage) / 12;
                     gsap.set(cursorImage, {
-                        css: {
-                            left: posXImage,
-                            top: posYImage
-                        }
+                        x: posXImage,
+                        y: posYImage,
+                        xPercent: -50,
+                        yPercent: -52,
+                        force3D: true
                     });
                 }
                 if (document.querySelector(".mouse-pos-list-btn")) {
                     posXBtn += (mouseX - posXBtn) / 7;
                     posYBtn += (mouseY - posYBtn) / 7;
                     gsap.set(cursorBtn, {
-                        css: {
-                            left: posXBtn,
-                            top: posYBtn
-                        }
+                        x: posXBtn,
+                        y: posYBtn,
+                        xPercent: -50,
+                        yPercent: -60,
+                        force3D: true
                     });
                 }
                 if (document.querySelector(".mouse-pos-list-span")) {
                     posXSpan += (mouseX - posXSpan) / 6;
                     posYSpan += (mouseY - posYSpan) / 6;
                     gsap.set(cursorSpan, {
-                        css: {
-                            left: posXSpan,
-                            top: posYSpan
-                        }
+                        x: posXSpan,
+                        y: posYSpan,
+                        xPercent: -50,
+                        yPercent: -60,
+                        force3D: true
                     });
                 }
             }
         });
     }
 
-    $(document).ready(function() {
+    $(document)
+        .off('mouseenter.mattiaStickyCursor mouseleave.mattiaStickyCursor', '.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span')
+        .on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span', function() {
+            $(".second-circle").addClass('hide-circles');
+        })
+        .on('mouseleave.mattiaStickyCursor', '.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span', function() {
+            $(".second-circle").removeClass('hide-circles');
+        });
 
-        $(".mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span").hover(
-            function () {
-                $(".second-circle").addClass('hide-circles');
-            },
-            function () {
-                $(".second-circle").removeClass('hide-circles');
-            }
-        );
-    });
-
-    $(document).on("mousemove", function(e) {
+    $(document).off("mousemove.mattiaStickyCursor").on("mousemove.mattiaStickyCursor", function(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
     });
@@ -852,38 +1002,35 @@ function initStickyCursorWithDelay() {
     // Animated Section Assortiment Single Floating Image
     // Source: http://jsfiddle.net/639Jj/1/ 
 
-    $('.mouse-pos-list-image-wrap a').on('mouseenter', function() {
+    $(document).off('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap a').on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap a', function() {
         $('.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-pos-list-span, .mouse-pos-list-span-big').addClass('active');
     });
-    $('.mouse-pos-list-image-wrap a').on('mouseleave', function() {
+    $(document).off('mouseleave.mattiaStickyCursor', '.mouse-pos-list-image-wrap a').on('mouseleave.mattiaStickyCursor', '.mouse-pos-list-image-wrap a', function() {
         $('.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-pos-list-span, .mouse-pos-list-span-big').removeClass('active');
     });
-    $('.single-tile-wrap a, .mouse-pos-list-archive a, .next-case-btn').on('mouseenter', function() {
+    $(document).off('mouseenter.mattiaStickyCursor', '.single-tile-wrap a, .mouse-pos-list-archive a, .next-case-btn').on('mouseenter.mattiaStickyCursor', '.single-tile-wrap a, .mouse-pos-list-archive a, .next-case-btn', function() {
         $('.mouse-pos-list-btn, .mouse-pos-list-span').addClass('active-big');
     });
-    $('.single-tile-wrap a, .mouse-pos-list-archive a, .next-case-btn').on('mouseleave', function() {
+    $(document).off('mouseleave.mattiaStickyCursor', '.single-tile-wrap a, .mouse-pos-list-archive a, .next-case-btn').on('mouseleave.mattiaStickyCursor', '.single-tile-wrap a, .mouse-pos-list-archive a, .next-case-btn', function() {
         $('.mouse-pos-list-btn, .mouse-pos-list-span').removeClass('active-big');
     });
-    $('main').on('mousedown', function() {
+    $('main').off('mousedown.mattiaStickyCursor').on('mousedown.mattiaStickyCursor', function() {
         $(".mouse-pos-list-btn, .mouse-pos-list-span").addClass('pressed');
     });
-    $('main').on('mouseup', function() {
+    $('main').off('mouseup.mattiaStickyCursor').on('mouseup.mattiaStickyCursor', function() {
         $(".mouse-pos-list-btn, .mouse-pos-list-span").removeClass('pressed');
     });
 
-    $(document).ready(function() {
+    $(document)
+        .off('mouseenter.mattiaStickyCursor mouseleave.mattiaStickyCursor', '.mouse-pos-list-image-wrap, .single-tile-wrap')
+        .on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap, .single-tile-wrap', function() {
+            $(".second-circle").addClass('hide-circles');
+        })
+        .on('mouseleave.mattiaStickyCursor', '.mouse-pos-list-image-wrap, .single-tile-wrap', function() {
+            $(".second-circle").removeClass('hide-circles');
+        });
 
-        $(".mouse-pos-list-image-wrap, .single-tile-wrap").hover(
-            function () {
-                $(".second-circle").addClass('hide-circles');
-            },
-            function () {
-                $(".second-circle").removeClass('hide-circles');
-            }
-        );
-    });
-
-    $('.mouse-pos-list-image-wrap li.visible').on('mouseenter', function() {
+    $(document).off('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap li.visible').on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap li.visible', function() {
 
         var $elements = $(".mouse-pos-list-image-wrap li.visible");
         var index = $elements.index($(this));
@@ -903,7 +1050,7 @@ function initStickyCursorWithDelay() {
 
     });
 
-    $('.archive-work-grid li').on('mouseenter', function() {
+    $(document).off('mouseenter.mattiaStickyCursor', '.archive-work-grid li').on('mouseenter.mattiaStickyCursor', '.archive-work-grid li', function() {
         $(".mouse-pos-list-btn").addClass("hover").delay(100).queue(function(next) {
             $(this).removeClass("hover");
             next();
@@ -920,7 +1067,7 @@ function initVisualFilter() {
     // Visual Filter
     $(document).ready(function() {
 
-        $('.toggle-row .btn').click(function() {
+        $('.toggle-row .btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.work-tiles li, .work-items li').addClass('tile-fade-out');
                 scroll.stop();
@@ -942,7 +1089,7 @@ function initVisualFilter() {
                 }, 700);
             }
         });
-        $('.all-btn').click(function() {
+        $('.all-btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.toggle-row .btn-normal').removeClass('active');
                 $('.toggle-row .btn-normal').addClass('not-active');
@@ -954,7 +1101,7 @@ function initVisualFilter() {
                 }, 300);
             }
         });
-        $('.first-work-category-btn').click(function() {
+        $('.first-work-category-btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.toggle-row .btn-normal').removeClass('active');
                 $('.toggle-row .btn-normal').addClass('not-active');
@@ -967,7 +1114,7 @@ function initVisualFilter() {
                 }, 300);
             }
         });
-        $('.second-work-category-btn').click(function() {
+        $('.second-work-category-btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.toggle-row .btn-normal').removeClass('active');
                 $('.toggle-row .btn-normal').addClass('not-active');
@@ -981,7 +1128,7 @@ function initVisualFilter() {
             }
         });
 
-        $('.grid-row .btn').click(function() {
+        $('.grid-row .btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.grid-fade').addClass('grid-fade-out');
                 scroll.stop();
@@ -1003,7 +1150,7 @@ function initVisualFilter() {
                 }, 700);
             }
         });
-        $('.grid-row .rows-btn').click(function() {
+        $('.grid-row .rows-btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.grid-row .btn-normal').removeClass('active');
                 $('.grid-row .btn-normal').addClass('not-active');
@@ -1018,7 +1165,7 @@ function initVisualFilter() {
                 }, 300);
             }
         });
-        $('.grid-row .columns-btn').click(function() {
+        $('.grid-row .columns-btn').off('click.mattiaVisualFilter').on('click.mattiaVisualFilter', function() {
             if ($(this).hasClass('active')) {} else {
                 $('.grid-row .btn-normal').removeClass('active');
                 $('.grid-row .btn-normal').addClass('not-active');
@@ -1187,7 +1334,13 @@ function initTricksWords() {
     for (var i = 0; i < spanWord.length; i++) {
 
         var wordWrap = spanWord.item(i);
-        wordWrap.innerHTML = wordWrap.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="span-line"><span class="span-line-inner">$2</span></span>');
+        if (!wordWrap) {
+            continue;
+        }
+        if (!wordWrap.querySelector('.span-line')) {
+            wordWrap.innerHTML = wordWrap.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="span-line"><span class="span-line-inner">$2</span></span>');
+        }
+        wordWrap.classList.add('is-split-ready');
 
     }
 
@@ -1198,16 +1351,14 @@ function initTricksWords() {
  */
 function initContactForm() {
 
-    $('.field').on('input', function() {
+    $('.field').off('input.mattiaContact').on('input.mattiaContact', function() {
         $(this).parent().toggleClass('not-empty', this.value.trim().length > 0);
     });
 
-    $(function() {
-        $('.field').focusout(function() {
-            var text_val = $(this).val();
-            $(this).parent().toggleClass('not-empty', text_val !== "");
-        }).focusout();
-    });
+    $('.field').off('focusout.mattiaContact').on('focusout.mattiaContact', function() {
+        var text_val = $(this).val();
+        $(this).parent().toggleClass('not-empty', text_val !== "");
+    }).trigger('focusout');
 
 }
 
@@ -1265,7 +1416,7 @@ function initDynamicNotch() {
             <div class="dynamic-notch-border dynamic-notch-border-right" aria-hidden="true">
                 <div class="dynamic-notch-border-shadow"></div>
             </div>
-            <div class="dynamic-notch-shell" tabindex="0" aria-expanded="false" aria-label="Open profile quick links">
+            <div class="dynamic-notch-shell" tabindex="0" role="button" aria-haspopup="true" aria-controls="dynamic-notch-expanded-panel" aria-expanded="false" aria-label="Open profile quick links">
                 <div class="dynamic-notch-surface">
                     <svg class="dynamic-notch-trace dynamic-notch-trace-closed" viewBox="0 0 215 33" preserveAspectRatio="none" aria-hidden="true" focusable="false">
                         <path class="dynamic-notch-trace-base" d="M9.85197 0C12.6134 0 14.852 2.23858 14.852 5V22.4579C14.852 27.9808 19.3291 32.4579 24.852 32.4579H190.502C196.025 32.4579 200.502 27.9808 200.502 22.4579V5C200.502 2.23858 202.74 0 205.502 0H215L213.502 0H0H9.85197Z"></path>
@@ -1279,7 +1430,7 @@ function initDynamicNotch() {
                     </svg>
                     <div class="dynamic-notch-compact">
                         <a href="/about/" class="dynamic-notch-avatar-link" aria-label="Go to about page">
-                            <img class="dynamic-notch-avatar" src="/assets/img/profile_circular.png" alt="Mattia Ippoliti profile picture" width="34" height="34" />
+                            <img class="dynamic-notch-avatar" src="/assets/img/profile_circular_96.png" alt="Mattia Ippoliti profile picture" width="34" height="34" />
                         </a>
                         <div class="dynamic-notch-text">
                             <span class="dynamic-notch-name">Mattia Ippoliti</span>
@@ -1295,7 +1446,7 @@ function initDynamicNotch() {
                             </a>
                         </div>
                     </div>
-                    <div class="dynamic-notch-expanded" aria-hidden="true">
+                    <div id="dynamic-notch-expanded-panel" class="dynamic-notch-expanded" aria-hidden="true">
                         <div class="dynamic-notch-links">
                             <div class="btn btn-link btn-link-external dynamic-notch-link-btn">
                                 <a href="https://www.linkedin.com/in/mattiaippoliti/" target="_blank" rel="noopener noreferrer" class="btn-click magnetic" data-strength="9" data-strength-text="5" aria-label="LinkedIn">
@@ -1365,6 +1516,7 @@ function initDynamicNotch() {
 
     const setLinksFocusable = (isExpanded) => {
         shell.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        shell.setAttribute('aria-label', isExpanded ? 'Close profile quick links' : 'Open profile quick links');
         expanded.setAttribute('aria-hidden', isExpanded ? 'false' : 'true');
         linkNodes.forEach((link) => {
             link.tabIndex = isExpanded ? 0 : -1;
@@ -1456,8 +1608,10 @@ function initDynamicNotch() {
                 y: 12
             });
             shell.tabIndex = -1;
+            shell.setAttribute('aria-disabled', 'true');
         } else {
             shell.tabIndex = 0;
+            shell.removeAttribute('aria-disabled');
         }
 
         syncNotchRowSizing(sizes);
@@ -1664,7 +1818,7 @@ function initTimeZone() {
     // https://stackoverflow.com/questions/63572780/how-to-update-intl-datetimeformat-with-new-date
 
     const timeSpan = document.querySelector("#timeSpan");
-    const copyrightYear = document.querySelector(".credits p");
+    const copyrightYear = document.querySelector(".credits p:nth-of-type(2)");
 
     const optionsTime = {
         timeZone: 'Europe/Amsterdam',
@@ -1685,7 +1839,10 @@ function initTimeZone() {
     
     // Aggiorna l'orologio ogni secondo
     updateTime();
-    setInterval(updateTime, 1000);
+    if (window.__mattiaClockInterval) {
+        window.clearInterval(window.__mattiaClockInterval);
+    }
+    window.__mattiaClockInterval = window.setInterval(updateTime, 1000);
 
     function updateTime() {
         const dateTime = new Date();
@@ -1695,7 +1852,7 @@ function initTimeZone() {
     
     function updateCopyrightYear() {
         const currentYear = new Date().getFullYear();
-        copyrightYear.textContent = `${currentYear} © Edition`;
+        copyrightYear.textContent = `${currentYear} \u00A9 Edition`;
     }
 }
 
@@ -2009,3 +2166,4 @@ function initScrolltriggerAnimations() {
     }); // End GSAP Matchmedia
 
 }
+
