@@ -19,7 +19,7 @@ function initLoaderHome() {
     var tl = gsap.timeline();
 
     tl.set(".loading-screen", {
-        top: "0",
+        yPercent: 0,
     });
 
     tl.set("main .once-in", {
@@ -44,15 +44,13 @@ function initLoaderHome() {
         opacity: 1,
     });
 
-    if ($(window).width() > 540) {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "10vh",
-        });
-    } else {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "5vh",
-        });
-    }
+    tl.set(".loading-screen .rounded-div-wrap.top", {
+        scaleY: 0,
+    });
+
+    tl.set(".loading-screen .rounded-div-wrap.bottom", {
+        scaleY: 1,
+    });
 
     tl.set("html", {
         cursor: "wait"
@@ -96,14 +94,14 @@ function initLoaderHome() {
 
     tl.to(".loading-screen", {
         duration: .8,
-        top: "-100%",
+        yPercent: -100,
         ease: "Power4.easeInOut",
         delay: .2
     });
 
     tl.to(".loading-screen .rounded-div-wrap.bottom", {
         duration: 1,
-        height: "0vh",
+        scaleY: 0,
         ease: "Power4.easeInOut"
     }, "=-.8");
 
@@ -114,11 +112,11 @@ function initLoaderHome() {
     }, "=-.8");
 
     tl.set(".loading-screen", {
-        top: "calc(-100%)"
+        yPercent: -100
     });
 
     tl.set(".loading-screen .rounded-div-wrap.bottom", {
-        height: "0vh"
+        scaleY: 0
     });
 
     tl.to("main .once-in", {
@@ -145,7 +143,7 @@ function initLoader() {
     var tl = gsap.timeline();
 
     tl.set(".loading-screen", {
-        top: "0",
+        yPercent: 0,
     });
 
     tl.set("main .once-in", {
@@ -157,15 +155,13 @@ function initLoader() {
         y: -50
     });
 
-    if ($(window).width() > 540) {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "10vh",
-        });
-    } else {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "5vh",
-        });
-    }
+    tl.set(".loading-screen .rounded-div-wrap.top", {
+        scaleY: 0,
+    });
+
+    tl.set(".loading-screen .rounded-div-wrap.bottom", {
+        scaleY: 1,
+    });
 
     tl.set("html", {
         cursor: "wait"
@@ -173,14 +169,14 @@ function initLoader() {
 
     tl.to(".loading-screen", {
         duration: .8,
-        top: "-100%",
+        yPercent: -100,
         ease: "Power4.easeInOut",
         delay: .5
     });
 
     tl.to(".loading-screen .rounded-div-wrap.bottom", {
         duration: 1,
-        height: "0vh",
+        scaleY: 0,
         ease: "Power4.easeInOut"
     }, "=-.8");
 
@@ -191,11 +187,11 @@ function initLoader() {
     }, "=-.8");
 
     tl.set(".loading-screen", {
-        top: "calc(-100%)"
+        yPercent: -100
     });
 
     tl.set(".loading-screen .rounded-div-wrap.bottom", {
-        height: "0vh"
+        scaleY: 0
     });
 
     tl.to("main .once-in", {
@@ -222,7 +218,7 @@ function pageTransitionIn() {
     });
 
     tl.set(".loading-screen", {
-        top: "100%"
+        yPercent: 100
     });
 
     tl.set(".loading-words", {
@@ -234,35 +230,25 @@ function pageTransitionIn() {
         cursor: "wait"
     });
 
-    if ($(window).width() > 540) {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "10vh",
-        });
-    } else {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "5vh",
-        });
-    }
+    tl.set(".loading-screen .rounded-div-wrap.top", {
+        scaleY: 0
+    });
+
+    tl.set(".loading-screen .rounded-div-wrap.bottom", {
+        scaleY: 1
+    });
 
     tl.to(".loading-screen", {
         duration: .5,
-        top: "0%",
+        yPercent: 0,
         ease: "Power4.easeIn"
     });
 
-    if ($(window).width() > 540) {
-        tl.to(".loading-screen .rounded-div-wrap.top", {
-            duration: .4,
-            height: "10vh",
-            ease: "Power4.easeIn"
-        }, "=-.5");
-    } else {
-        tl.to(".loading-screen .rounded-div-wrap.top", {
-            duration: .4,
-            height: "10vh",
-            ease: "Power4.easeIn"
-        }, "=-.5");
-    }
+    tl.to(".loading-screen .rounded-div-wrap.top", {
+        duration: .4,
+        scaleY: -1,
+        ease: "Power4.easeIn"
+    }, "=-.5");
 
     tl.to(".loading-words", {
         duration: .8,
@@ -273,12 +259,12 @@ function pageTransitionIn() {
     });
 
     tl.set(".loading-screen .rounded-div-wrap.top", {
-        height: "0vh"
+        scaleY: 0
     });
 
     tl.to(".loading-screen", {
         duration: .8,
-        top: "-100%",
+        yPercent: -100,
         ease: "Power3.easeInOut"
     }, "=-.2");
 
@@ -290,7 +276,7 @@ function pageTransitionIn() {
 
     tl.to(".loading-screen .rounded-div-wrap.bottom", {
         duration: .85,
-        height: "0",
+        scaleY: 0,
         ease: "Power3.easeInOut"
     }, "=-.6");
 
@@ -298,18 +284,12 @@ function pageTransitionIn() {
         cursor: "auto"
     }, "=-0.6");
 
-    if ($(window).width() > 540) {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "10vh"
-        });
-    } else {
-        tl.set(".loading-screen .rounded-div-wrap.bottom", {
-            height: "5vh"
-        });
-    }
+    tl.set(".loading-screen .rounded-div-wrap.bottom", {
+        scaleY: 1
+    });
 
     tl.set(".loading-screen", {
-        top: "100%"
+        yPercent: 100
     });
 
     tl.set(".loading-words", {
@@ -752,19 +732,28 @@ function initMagneticButtons() {
 
     // Magnetic Buttons
     // Found via: https://codepen.io/tdesero/pen/RmoxQg
-    var magnets = document.querySelectorAll('.magnetic');
+    var magnets = Array.from(document.querySelectorAll('.magnetic'));
     var magnetMetrics = new WeakMap();
+    var magnetTextNodes = new WeakMap();
 
     function cacheMetrics(magnetButton) {
         if (!magnetButton) {
             return;
         }
+
+        var textNode = magnetTextNodes.get(magnetButton);
+        if (!textNode) {
+            textNode = magnetButton.querySelector(".btn-text");
+            magnetTextNodes.set(magnetButton, textNode || null);
+        }
+
         var bounding = magnetButton.getBoundingClientRect();
         magnetMetrics.set(magnetButton, {
             left: bounding.left,
             top: bounding.top,
-            width: magnetButton.offsetWidth || bounding.width || 1,
-            height: magnetButton.offsetHeight || bounding.height || 1
+            width: bounding.width || magnetButton.offsetWidth || 1,
+            height: bounding.height || magnetButton.offsetHeight || 1,
+            textNode: textNode
         });
     }
 
@@ -791,13 +780,37 @@ function initMagneticButtons() {
             rotate: "0.001deg",
             ease: Power4.easeOut
         });
-        gsap.to($(magnetButton).find(".btn-text"), 1.5, {
-            x: relX * magnetsStrengthText,
-            y: relY * magnetsStrengthText,
-            rotate: "0.001deg",
-            ease: Power4.easeOut
-        });
+        if (metrics.textNode) {
+            gsap.to(metrics.textNode, 1.5, {
+                x: relX * magnetsStrengthText,
+                y: relY * magnetsStrengthText,
+                rotate: "0.001deg",
+                ease: Power4.easeOut
+            });
+        }
     }
+
+    if (window.__mattiaMagneticResizeHandler) {
+        window.removeEventListener('resize', window.__mattiaMagneticResizeHandler);
+    }
+    if (window.__mattiaMagneticResizeRaf) {
+        cancelAnimationFrame(window.__mattiaMagneticResizeRaf);
+        window.__mattiaMagneticResizeRaf = null;
+    }
+    window.__mattiaMagneticResizeHandler = function() {
+        if (window.__mattiaMagneticResizeRaf) {
+            cancelAnimationFrame(window.__mattiaMagneticResizeRaf);
+        }
+        window.__mattiaMagneticResizeRaf = requestAnimationFrame(function() {
+            magnets.forEach(function(magnet) {
+                cacheMetrics(magnet);
+            });
+            window.__mattiaMagneticResizeRaf = null;
+        });
+    };
+    window.addEventListener('resize', window.__mattiaMagneticResizeHandler, {
+        passive: true
+    });
 
     // START : If screen is bigger as 540 px do magnetic
     if (window.innerWidth > 540) {
@@ -820,11 +833,14 @@ function initMagneticButtons() {
                     y: 0,
                     ease: Elastic.easeOut
                 });
-                gsap.to($(this).find(".btn-text"), 1.5, {
-                    x: 0,
-                    y: 0,
-                    ease: Elastic.easeOut
-                });
+                var leaveMetrics = magnetMetrics.get(event.currentTarget);
+                if (leaveMetrics && leaveMetrics.textNode) {
+                    gsap.to(leaveMetrics.textNode, 1.5, {
+                        x: 0,
+                        y: 0,
+                        ease: Elastic.easeOut
+                    });
+                }
             });
         });
 
@@ -1258,7 +1274,13 @@ function initScrollLetters() {
     // Fixed example with resizing
     // https://codepen.io/GreenSock/pen/QWqoKBv?editors=0010
 
+    if (window.__mattiaScrollLettersCleanup) {
+        window.__mattiaScrollLettersCleanup();
+        window.__mattiaScrollLettersCleanup = null;
+    }
+
     let direction = 1; // 1 = forward, -1 = backward scroll
+    const cleanupCallbacks = [];
 
     const roll1 = roll(".big-name .name-wrap", {
             duration: 18
@@ -1279,39 +1301,102 @@ function initScrollLetters() {
             }
         });
 
+    cleanupCallbacks.push(function() {
+        if (scroll && typeof scroll.kill === 'function') {
+            scroll.kill();
+        }
+    });
+
+    window.__mattiaScrollLettersCleanup = function() {
+        cleanupCallbacks.forEach(function(cleanupCallback) {
+            cleanupCallback();
+        });
+        cleanupCallbacks.length = 0;
+        window.__mattiaScrollLettersCleanup = null;
+    };
+
     // helper function that clones the targets, places them next to the original, then animates the xPercent in a loop to make it appear to roll across the screen in a seamless loop.
     function roll(targets, vars, reverse) {
         vars = vars || {};
         vars.ease || (vars.ease = "none");
         const tl = gsap.timeline({
-                repeat: -1,
-                onReverseComplete() {
-                    this.totalTime(this.rawTime() + this.duration() * 10); // otherwise when the playhead gets back to the beginning, it'd stop. So push the playhead forward 10 iterations (it could be any number)
-                }
-            }),
-            elements = gsap.utils.toArray(targets),
-            clones = elements.map(el => {
-                let clone = el.cloneNode(true);
-                el.parentNode.appendChild(clone);
-                return clone;
-            }),
-            positionClones = () => elements.forEach((el, i) => gsap.set(clones[i], {
-                position: "absolute",
-                overwrite: false,
+            repeat: -1,
+            onReverseComplete() {
+                this.totalTime(this.rawTime() + this.duration() * 10); // otherwise when the playhead gets back to the beginning, it'd stop. So push the playhead forward 10 iterations (it could be any number)
+            }
+        });
+        const elements = gsap.utils.toArray(targets);
+        const clones = elements.map(el => {
+            let clone = el.cloneNode(true);
+            el.parentNode.appendChild(clone);
+            return clone;
+        });
+        let resizeRafId = 0;
+
+        function positionClones() {
+            const clonePositions = elements.map((el) => ({
                 top: el.offsetTop,
                 left: el.offsetLeft + (reverse ? -el.offsetWidth : el.offsetWidth)
             }));
+
+            gsap.set(clones, {
+                position: "absolute",
+                overwrite: false
+            });
+
+            clonePositions.forEach((position, index) => {
+                gsap.set(clones[index], {
+                    top: position.top,
+                    left: position.left
+                });
+            });
+        }
+
+        function syncTimelinePosition() {
+            let time = tl.totalTime(); // record the current time
+            tl.totalTime(0); // rewind and clear out the timeline
+            positionClones(); // reposition
+            tl.totalTime(time); // jump back to the proper time
+        }
+
+        function handleResize() {
+            if (resizeRafId) {
+                cancelAnimationFrame(resizeRafId);
+            }
+            resizeRafId = requestAnimationFrame(() => {
+                syncTimelinePosition();
+                resizeRafId = 0;
+            });
+        }
+
+        if (!elements.length) {
+            return tl;
+        }
+
         positionClones();
         elements.forEach((el, i) => tl.to([el, clones[i]], {
             xPercent: reverse ? 100 : -100,
             ...vars
         }, 0));
-        window.addEventListener("resize", () => {
-            let time = tl.totalTime(); // record the current time
-            tl.totalTime(0); // rewind and clear out the timeline
-            positionClones(); // reposition
-            tl.totalTime(time); // jump back to the proper time
+
+        window.addEventListener("resize", handleResize, {
+            passive: true
         });
+
+        cleanupCallbacks.push(function() {
+            window.removeEventListener("resize", handleResize);
+            if (resizeRafId) {
+                cancelAnimationFrame(resizeRafId);
+                resizeRafId = 0;
+            }
+            clones.forEach((clone) => {
+                if (clone && clone.parentNode) {
+                    clone.parentNode.removeChild(clone);
+                }
+            });
+            tl.kill();
+        });
+
         return tl;
     }
 
