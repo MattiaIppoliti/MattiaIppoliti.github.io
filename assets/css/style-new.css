@@ -114,10 +114,8 @@ html.touch-device main .main-wrap {
     padding: 0;
     width: 100%;
     height: 100%;
-    top: 0;
     left: 0;
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
+    will-change: top;
 }
 
 .loading-screen,
@@ -134,22 +132,20 @@ html.touch-device main .main-wrap {
 .loading-container .rounded-div-wrap.top {
     top: 0;
     position: absolute;
-    transform: translate3d(0, -99%, 0) scale(1, 0);
-    transform-origin: 50% 0%;
+    transform: translateY(-99%) scale(1, -1);
     z-index: 2;
-    height: 10vh;
-    will-change: transform;
+    height: 0vh;
+    will-change: height;
 }
 
 .loading-container .rounded-div-wrap.bottom {
     top: unset;
     bottom: 0;
     position: absolute;
-    transform: translate3d(0, 99%, 0) scale(1, 0);
-    transform-origin: 50% 100%;
+    transform: translateY(99%);
     z-index: 2;
-    height: 10vh;
-    will-change: transform;
+    height: 0vh;
+    will-change: height;
 }
 
 .loading-container .loading-words {
@@ -224,10 +220,6 @@ html.touch-device main .main-wrap {
 }
 
 @media screen and (max-width: 540px) {
-    .loading-container .rounded-div-wrap.bottom {
-        height: 5vh;
-    }
-
     .loading-container .dot {
         top: 42%;
     }
