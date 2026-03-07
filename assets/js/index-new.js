@@ -9,6 +9,124 @@ const selectAll = (e) => document.querySelectorAll(e);
 let dynamicNotchCleanup = null;
 let dynamicNotchTimeline = null;
 let stickyCursorTicker = null;
+let scheduledScrollRefreshRaf = null;
+let scheduledScrollRefreshTimeout = null;
+
+function getSecondCursor() {
+    return document.querySelector('.second-circle');
+}
+
+function setSecondCursorHidden(isHidden) {
+    const secondCursor = getSecondCursor();
+    if (!secondCursor || window.innerWidth <= 767) {
+        return;
+    }
+
+    secondCursor.classList.toggle('hide-circles', Boolean(isHidden));
+}
+
+function resetSecondCursorState() {
+    const secondCursor = getSecondCursor();
+    if (!secondCursor) {
+        return;
+    }
+
+    gsap.killTweensOf(secondCursor);
+    secondCursor.classList.remove('hide-circles');
+    gsap.set(secondCursor, {
+        opacity: 1,
+        scale: 1
+    });
+}
+
+function shrinkSecondCursor() {
+    const secondCursor = getSecondCursor();
+    if (!secondCursor || window.innerWidth <= 767) {
+        return;
+    }
+
+    TweenLite.to(secondCursor, 0.3, {
+        opacity: 1,
+        scale: 0
+    });
+}
+
+function restoreSecondCursor() {
+    const secondCursor = getSecondCursor();
+    if (!secondCursor || window.innerWidth <= 767) {
+        return;
+    }
+
+    TweenLite.to(secondCursor, 0.3, {
+        opacity: 1,
+        scale: 1
+    });
+}
+
+function moveCircle(e) {
+    const secondCursor = getSecondCursor();
+    if (!secondCursor) {
+        return;
+    }
+
+    TweenLite.to(secondCursor, 0.4, {
+        x: e.clientX,
+        y: e.clientY
+    });
+}
+
+function handleMouseMove(e) {
+    if (window.innerWidth > 767) {
+        moveCircle(e);
+    }
+}
+
+function initSecondCursor() {
+    resetSecondCursorState();
+
+    $(window)
+        .off('mousemove.mattiaSecondCursor')
+        .on('mousemove.mattiaSecondCursor', handleMouseMove);
+
+    $(document)
+        .off('mouseenter.mattiaSecondCursorLinks mouseleave.mattiaSecondCursorLinks', 'a')
+        .on('mouseenter.mattiaSecondCursorLinks', 'a', shrinkSecondCursor)
+        .on('mouseleave.mattiaSecondCursorLinks', 'a', restoreSecondCursor);
+}
+
+function scheduleScrollRefresh(delay = 0) {
+    const runRefresh = function() {
+        if (typeof ScrollTrigger !== 'undefined' && typeof ScrollTrigger.refresh === 'function') {
+            ScrollTrigger.refresh();
+        }
+        if (scroll && typeof scroll.update === 'function') {
+            scroll.update();
+        }
+        scheduledScrollRefreshRaf = null;
+    };
+
+    const queueRefresh = function() {
+        if (scheduledScrollRefreshRaf) {
+            cancelAnimationFrame(scheduledScrollRefreshRaf);
+        }
+        scheduledScrollRefreshRaf = requestAnimationFrame(function() {
+            scheduledScrollRefreshRaf = requestAnimationFrame(runRefresh);
+        });
+    };
+
+    if (delay > 0) {
+        if (scheduledScrollRefreshTimeout) {
+            clearTimeout(scheduledScrollRefreshTimeout);
+        }
+        scheduledScrollRefreshTimeout = window.setTimeout(function() {
+            scheduledScrollRefreshTimeout = null;
+            queueRefresh();
+        }, delay);
+        return;
+    }
+
+    queueRefresh();
+}
 
 initCLSDebugObserver();
 initPageTransitions();
@@ -368,6 +486,9 @@ function initPageTransitions() {
     barba.hooks.afterEnter(() => {
         window.scrollTo(0, 0);
         initCookieViews();
+        resetSecondCursorState();
+        scheduleScrollRefresh();
+        scheduleScrollRefresh(250);
     });
 
     if ($(window).width() > 540) {
@@ -518,6 +639,7 @@ function initScript() {
     select('body').classList.remove('is-loading');
     initWindowInnerheight();
     initCheckTouchDevice();
+    initSecondCursor();
     initHamburgerNav();
     initDynamicNotch();
     initMagneticButtons();
@@ -531,6 +653,8 @@ function initScript() {
     initLazyLoad();
     initPlayVideoInview();
     initScrolltriggerAnimations();
+    scheduleScrollRefresh();
+    scheduleScrollRefresh(250);
 }
 
 /**
@@ -699,10 +823,10 @@ function initHamburgerNav() {
     $(document)
         .off('mouseenter.mattiaNav mouseleave.mattiaNav', '.btn-hamburger, .btn-menu')
         .on('mouseenter.mattiaNav', '.btn-hamburger, .btn-menu', function() {
-            $(".second-circle").addClass('hide-circles');
+            setSecondCursorHidden(true);
         })
         .on('mouseleave.mattiaNav', '.btn-hamburger, .btn-menu', function() {
-            $(".second-circle").removeClass('hide-circles');
+            setSecondCursorHidden(false);
         });
 
     $(document)
@@ -867,10 +991,10 @@ function initMagneticButtons() {
         $(document)
             .off('mouseenter.mattiaMagnetic mouseleave.mattiaMagnetic', '.magnetic, .work-items')
             .on('mouseenter.mattiaMagnetic', '.magnetic, .work-items', function() {
-                $(".second-circle").addClass('hide-circles');
+                setSecondCursorHidden(true);
             })
             .on('mouseleave.mattiaMagnetic', '.magnetic, .work-items', function() {
-                $(".second-circle").removeClass('hide-circles');
+                setSecondCursorHidden(false);
             });
     } // END : If screen is bigger as 540 px do magnetic
 
@@ -922,39 +1046,6 @@ function initMagneticButtons() {
  */
 
 // Second Mouse Cursor [Ippoliti Mattia]
-
-var $circle = $('.second-circle')
-
-function moveCircle(e) {
-    TweenLite.to($circle, 0.4, {
-        x: e.clientX,
-        y: e.clientY
-    });
-}
-
-function handleMouseMove(e) {
-    // Check if the screen width is greater than 767 pixels (adjust as needed)
-    if (window.innerWidth > 767) {
-        moveCircle(e);
-    }
-}
-
-function hoverFunc(e) {
-  TweenLite.to($circle, 0.3, {
-        opacity: 1,
-        scale: 0
-    });
-}
-
-function unhoverFunc(e) {
-  TweenLite.to($circle, 0.3, {
-        opacity: 1,
-        scale: 1
-    });
-}
-
-$(window).on('mousemove', handleMouseMove);
-$("a").hover(hoverFunc, unhoverFunc);
 
 // Sticky Cursor with delay
 // https://greensock.com/forums/topic/21161-animated-mouse-cursor/
@@ -1024,10 +1115,10 @@ function initStickyCursorWithDelay() {
     $(document)
         .off('mouseenter.mattiaStickyCursor mouseleave.mattiaStickyCursor', '.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span')
         .on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span', function() {
-            $(".second-circle").addClass('hide-circles');
+            setSecondCursorHidden(true);
         })
         .on('mouseleave.mattiaStickyCursor', '.mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span', function() {
-            $(".second-circle").removeClass('hide-circles');
+            setSecondCursorHidden(false);
         });
 
     $(document).off("mousemove.mattiaStickyCursor").on("mousemove.mattiaStickyCursor", function(e) {
@@ -1060,10 +1151,10 @@ function initStickyCursorWithDelay() {
     $(document)
         .off('mouseenter.mattiaStickyCursor mouseleave.mattiaStickyCursor', '.mouse-pos-list-image-wrap, .single-tile-wrap')
         .on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap, .single-tile-wrap', function() {
-            $(".second-circle").addClass('hide-circles');
+            setSecondCursorHidden(true);
         })
         .on('mouseleave.mattiaStickyCursor', '.mouse-pos-list-image-wrap, .single-tile-wrap', function() {
-            $(".second-circle").removeClass('hide-circles');
+            setSecondCursorHidden(false);
         });
 
     $(document).off('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap li.visible').on('mouseenter.mattiaStickyCursor', '.mouse-pos-list-image-wrap li.visible', function() {
@@ -1732,11 +1823,7 @@ function initDynamicNotch() {
     };
 
     const setSecondCursorHiddenForNotch = (isHidden) => {
-        const secondCursor = document.querySelector('.second-circle');
-        if (!secondCursor || window.innerWidth <= 767) {
-            return;
-        }
-        secondCursor.classList.toggle('hide-circles', Boolean(isHidden));
+        setSecondCursorHidden(isHidden);
     };
 
     const handleMouseEnter = () => {
@@ -1969,6 +2056,13 @@ function initLazyLoad() {
     // https://github.com/verlok/vanilla-lazyload
     var lazyLoadInstance = new LazyLoad({
         elements_selector: ".lazy",
+        callback_loaded: function() {
+            scheduleScrollRefresh();
+            scheduleScrollRefresh(200);
+        },
+        callback_finish: function() {
+            scheduleScrollRefresh();
+        }
     });
 
 }
@@ -2271,4 +2365,3 @@ function initScrolltriggerAnimations() {
     }); // End GSAP Matchmedia
 
 }
-
